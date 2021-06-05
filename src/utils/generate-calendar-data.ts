@@ -1,6 +1,6 @@
 import { DateTime } from 'luxon';
 
-const isCurrentMonth = (dtDay: DateTime) => {
+const isTodaysMonth = (dtDay: DateTime) => {
   return DateTime.now().month === dtDay.month;
 };
 
@@ -12,8 +12,10 @@ const formatWeek = (week: DateTime[]) => {
   return week.map((el) => {
     return {
       day: el.day,
+      month: el.month,
+      year: el.year,
       isToday: isToday(el),
-      isCurrentMonth: isCurrentMonth(el),
+      isTodaysMonth: isTodaysMonth(el),
     };
   });
 };

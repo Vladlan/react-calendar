@@ -30,6 +30,10 @@
     font-family: Roboto, Arial, sans-serif;
     color: var(--text-secondary);
     text-transform: uppercase;
+
+    &:last-child {
+      border-right: none;
+    }
   }
 
   &-GridBody {
@@ -46,21 +50,5 @@
     border-bottom: 1px solid var(--calendar-border-main);
     display: flex;
     flex: 1 1 0;
-  }
-
-  &-GridBodyRowCell {
-    font-size: 18px;
-    line-height: 30px;
-    border-right: 1px solid var(--calendar-border-main);
-    color: var(--text-secondary);
-    flex: 1 1 0;
-
-    &_today {
-      font-weight: bold;
-      color: var(--text-main);
-    }
-    &_outOfMonth {
-      color: var(--text-secondary-light-1);
-    }
   }
 }

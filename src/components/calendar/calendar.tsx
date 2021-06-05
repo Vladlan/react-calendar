@@ -1,9 +1,10 @@
-import React from 'react';
+import { useContext } from 'react';
 import './calendar.scss';
 import { Info } from 'luxon';
 import { generateCalendarData } from '../../utils';
 import { AppContext } from '../../state';
 import { cn } from '@bem-react/classname';
+import { CalendarDay } from '../calendar-day';
 
 const bem = cn('Calendar');
 
@@ -11,7 +12,7 @@ export function Calendar() {
   const weekdays = Info.weekdays('long');
   const {
     state: { currentMonth, currentYear },
-  } = React.useContext(AppContext);
+  } = useContext(AppContext);
   const calendarData = generateCalendarData(currentYear, currentMonth);
   return (
     <main className={bem()}>
@@ -27,16 +28,7 @@ export function Calendar() {
           {calendarData.map((week, weekIndex) => (
             <div className={bem('GridBodyRow')} key={`id-w-${weekIndex}`}>
               {week.map((day, dayIndex) => (
-                <div
-                  className={`
-                  ${bem('GridBodyRowCell', {
-                    today: day.isToday,
-                    outOfMonth: !day.isCurrentMonth,
-                  })}`}
-                  key={`id-d-${dayIndex}`}
-                >
-                  <div>{day.day}</div>
-                </div>
+                <CalendarDay key={`id-d-${dayIndex}`} dayData={day} />
               ))}
             </div>
           ))}

@@ -1,4 +1,4 @@
-import React from 'react';
+import { useContext } from 'react';
 import './header.scss';
 import { ACTIONS, AppContext } from '../../state';
 import { DateTime } from 'luxon';
@@ -10,7 +10,7 @@ export function Header() {
   const {
     state: { currentMonth, currentYear },
     dispatch,
-  } = React.useContext(AppContext);
+  } = useContext(AppContext);
   const currentMonthName = DateTime.fromObject({
     month: currentMonth,
   }).monthLong;
