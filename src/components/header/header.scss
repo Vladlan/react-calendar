@@ -4,42 +4,48 @@
   display: flex;
   flex: 0 1 0;
   flex-direction: row;
-  border: 1px solid red;
   padding: toRem(4);
   height: toRem(36);
 
-  &__logo,
-  &__calendar-switcher {
+  &-Logo,
+  &-CalendarSwitcher {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    border: 1px solid goldenrod;
+    padding: 0 toRem(16);
   }
 
-  &__logo {
+  &-Logo {
     margin: 0;
     font-size: toRem(20);
     padding-right: toRem(8);
   }
 
-  &__calendar-switcher {
+  &-CalendarSwitcher {
     padding-left: toRem(8);
+  }
 
-    &-btn {
-      border: 1px solid red;
-      background: none;
-      font-weight: bold;
-      font-size: toRem(20);
-      cursor: pointer;
-    }
+  &-CalendarSwitcherBtn {
+    background: none;
+    font-size: toRem(20);
+    cursor: pointer;
+    border: 1px solid silver;
+    border-radius: 50%;
+    height: toRem(25);
+    width: toRem(25);
+    margin: 0 toRem(4);
 
-    &-month,
-    &-year {
-      border: 1px solid grey;
-      font-size: toRem(20);
-      font-weight: bold;
-      padding: toRem(4) toRem(8);
+    &:hover {
+      color: grey;
     }
+  }
+
+  &-CalendarSwitcherMonth,
+  &-CalendarSwitcherYear {
+    font-size: toRem(20);
+    font-weight: bold;
+    padding: toRem(4) toRem(8);
+    text-align: left;
   }
 }

@@ -2,6 +2,9 @@ import React from 'react';
 import './header.scss';
 import { ACTIONS, AppContext } from '../../state';
 import { DateTime } from 'luxon';
+import { cn } from '@bem-react/classname';
+
+const bem = cn('Header');
 
 export function Header() {
   const {
@@ -51,25 +54,17 @@ export function Header() {
   };
 
   return (
-    <header className="Header">
-      <h1 className="Header__logo">React Calendar</h1>
-      <div className="Header__calendar-switcher">
-        <button
-          className="Header__calendar-switcher-btn"
-          onClick={decrementMonth}
-        >
+    <header className={bem()}>
+      <h1 className={bem('Logo')}>React Calendar</h1>
+      <div className={bem('CalendarSwitcher')}>
+        <button className={bem('CalendarSwitcherBtn')} onClick={decrementMonth}>
           {'<'}
         </button>
-        <span className="Header__calendar-switcher-month">
-          {currentMonthName}
-        </span>
-        <span className="Header__calendar-switcher-year">{currentYear}</span>
-        <button
-          className="Header__calendar-switcher-btn"
-          onClick={incrementMonth}
-        >
+        <button className={bem('CalendarSwitcherBtn')} onClick={incrementMonth}>
           {'>'}
         </button>
+        <span className={bem('CalendarSwitcherMonth')}>{currentMonthName}</span>
+        <span className={bem('CalendarSwitcherYear')}>{currentYear}</span>
       </div>
     </header>
   );
