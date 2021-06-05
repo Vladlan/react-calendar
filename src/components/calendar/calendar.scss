@@ -20,16 +20,15 @@
   }
 
   &-GridHeaderColumn {
-    border-top: 1px solid #dadce0;
-    border-bottom: 1px solid #dadce0;
-    border-right: #dadce0 1px solid;
+    border: 1px solid var(--calendar-border-main);
+    border-left: none;
     display: flex;
     justify-content: center;
     align-items: center;
     flex: 1 1 0;
     text-align: center;
     font-family: Roboto, Arial, sans-serif;
-    color: #70757a;
+    color: var(--text-secondary);
     text-transform: uppercase;
   }
 
@@ -44,7 +43,7 @@
   &-GridBodyRow {
     position: relative;
     overflow: hidden;
-    border-bottom: #dadce0 1px solid;
+    border-bottom: 1px solid var(--calendar-border-main);
     display: flex;
     flex: 1 1 0;
   }
@@ -52,13 +51,13 @@
   &-GridBodyRowCell {
     font-size: 18px;
     line-height: 30px;
-    border-right: #dadce0 1px solid;
-    color: #70757a;
+    border-right: 1px solid var(--calendar-border-main);
+    color: var(--text-secondary);
     flex: 1 1 0;
 
     &_today {
       font-weight: bold;
-      color: black;
+      color: var(--text-main);
     }
     &_outOfMonth {
       color: rgba(112, 117, 122, 0.48);

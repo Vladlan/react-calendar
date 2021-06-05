@@ -58,10 +58,10 @@ export function Header() {
       <h1 className={bem('Logo')}>React Calendar</h1>
       <div className={bem('CalendarSwitcher')}>
         <button className={bem('CalendarSwitcherBtn')} onClick={decrementMonth}>
-          {'<'}
+          <span>{'<'}</span>
         </button>
         <button className={bem('CalendarSwitcherBtn')} onClick={incrementMonth}>
-          {'>'}
+          <span>{'>'}</span>
         </button>
         <span className={bem('CalendarSwitcherMonth')}>{currentMonthName}</span>
         <span className={bem('CalendarSwitcherYear')}>{currentYear}</span>

@@ -1,3 +1,5 @@
+@import 'normilize.css';
+
 html {
   height: 100%;
 }
@@ -11,13 +13,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
   height: 100%;
   text-rendering: geometricPrecision;
+
+  --calendar-border-main: #dadce0;
+  --text-secondary: #70757a;
+  --text-main: #000;
 }
 
 div#root {
   height: 100%;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
 }

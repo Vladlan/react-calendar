@@ -28,13 +28,25 @@
 
   &-CalendarSwitcherBtn {
     background: none;
-    font-size: toRem(20);
+    font-size: toRem(18);
+    display: flex;
+    justify-content: center;
+    align-items: center;
     cursor: pointer;
     border: 1px solid silver;
     border-radius: 50%;
     height: toRem(25);
     width: toRem(25);
     margin: 0 toRem(4);
+
+    & > span {
+      height: toRem(20);
+      font-size: toRem(20);
+      line-height: toRem(20);
+      padding-bottom: toRem(4);
+      display: flex;
+      vertical-align: middle;
+    }
 
     &:hover {
       color: grey;
