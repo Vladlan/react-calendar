@@ -60,7 +60,7 @@
       color: var(--text-main);
     }
     &_outOfMonth {
-      color: rgba(112, 117, 122, 0.48);
+      color: var(--text-secondary-light-1);
     }
   }
 }
