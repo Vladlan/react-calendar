@@ -25,19 +25,23 @@ export const EventItemView = memo(
         </div>
         <div className={bem('EventInfoContainer')}>
           <p className={bem('EventDescription')}>{description}</p>
-          <h5 className={bem('AttendeesTitle')}>Attendees:</h5>
-          <ul className={bem('Attendees')}>
-            {attendees.map((el, index) => (
-              <li className={bem('Attendee')} key={`id-att-${index}`}>
-                <a
-                  href={`mailto:${el}?subject=${description}&body=From ${start} to ${end}`}
-                  key={el}
-                >
-                  {el}
-                </a>
-              </li>
-            ))}
-          </ul>
+          {!!attendees.length && (
+            <>
+              <h5 className={bem('AttendeesTitle')}>Attendees:</h5>
+              <ul className={bem('Attendees')}>
+                {attendees.map((el, index) => (
+                  <li className={bem('Attendee')} key={`id-att-${index}`}>
+                    <a
+                      href={`mailto:${el}?subject=${description}&body=From ${start} to ${end}`}
+                      key={el}
+                    >
+                      {el}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
         </div>
         <div className={bem('EditContainer')}>
           <button
