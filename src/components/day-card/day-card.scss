@@ -1,0 +1,87 @@
+@import './src/scss-utils/index';
+
+.DayCard {
+  display: flex;
+  flex-direction: column;
+  color: var(--text-secondary);
+
+  &-EventsList {
+    padding: 0;
+    margin: 0;
+  }
+
+  &-DayEvent {
+    display: flex;
+    border-bottom: 1px solid var(--border-calendar-secondary);
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  &-TimeContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-size: toRem(14);
+    padding: toRem(8);
+    border-right: 1px solid var(--border-calendar-secondary);
+  }
+
+  &-EventInfoContainer {
+    display: flex;
+    flex-direction: column;
+    padding: toRem(24) toRem(8);
+    flex-grow: 1;
+  }
+
+  &-EventDescription {
+    font-style: italic;
+    margin-top: 0;
+  }
+
+  &-AttendeesTitle {
+    padding-bottom: toRem(4);
+    font-size: toRem(16);
+    font-weight: normal;
+    margin: 0;
+  }
+
+  &-Attendees {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  &-Attendee {
+    display: inline-block;
+    margin-right: toRem(8);
+
+    & > a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      &:hover {
+        color: var(--text-main);
+      }
+    }
+  }
+
+  &-EditContainer {
+    display: flex;
+    flex-direction: column;
+    align-self: end;
+    padding: toRem(4);
+  }
+
+  &-EditContainerButton {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    color: var(--text-secondary);
+    font-size: toRem(12);
+
+    &:hover {
+      color: var(--text-main);
+    }
+  }
+}

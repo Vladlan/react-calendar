@@ -1,0 +1,58 @@
+@import './src/scss-utils/index';
+
+.Modal {
+  position: fixed;
+  z-index: 100;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease-in-out;
+
+  &-Content {
+    width: 70%;
+    background-color: #fff;
+  }
+
+  &-Header,
+  &-Footer {
+    display: flex;
+    padding: toRem(12);
+  }
+
+  &-Header {
+    font-size: toRem(28);
+  }
+
+  &-Footer {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &-Title {
+    margin: 0;
+  }
+
+  &-Body {
+    padding: 0;
+    border-top: 1px solid var(--border-calendar-secondary);
+    border-bottom: 1px solid var(--border-calendar-secondary);
+    max-height: 80vh;
+    overflow: auto;
+  }
+
+  &-Btn_close {
+    background-color: transparent;
+    cursor: pointer;
+    color: var(--text-secondary);
+    border: none;
+
+    &:hover {
+      color: var(--text-main);
+    }
+  }
+}

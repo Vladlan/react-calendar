@@ -1,5 +1,50 @@
 import { DateTime } from 'luxon';
 
+const events = [
+  {
+    start: '12:00',
+    end: '13:00',
+    description: 'Some Long Event Description Bla Bla',
+    attendees: ['att1@m.com', 'att2@m.com', 'att3@m.com', 'att4@m.com'],
+    id: 'id-1',
+  },
+  {
+    start: '13:00',
+    end: '14:00',
+    description: 'Some Long Event Description Bla Bla',
+    attendees: ['att1@m.com', 'att2@m.com', 'att3@m.com', 'att4@m.com'],
+    id: 'id-2',
+  },
+  {
+    start: '14:00',
+    end: '15:00',
+    description: 'Some Long Event Description Bla Bla',
+    attendees: ['att1@m.com', 'att2@m.com', 'att3@m.com', 'att4@m.com'],
+    id: 'id-3',
+  },
+  {
+    start: '15:00',
+    end: '16:00',
+    description: 'Some Long Event Description Bla Bla',
+    attendees: ['att1@m.com', 'att2@m.com', 'att3@m.com', 'att4@m.com'],
+    id: 'id-4',
+  },
+  {
+    start: '16:00',
+    end: '17:00',
+    description: 'Some Long Event Description Bla Bla',
+    attendees: ['att1@m.com', 'att2@m.com', 'att3@m.com', 'att4@m.com'],
+    id: 'id-5',
+  },
+  {
+    start: '17:00',
+    end: '18:00',
+    description: 'Some Long Event Description Bla Bla',
+    attendees: ['att1@m.com', 'att2@m.com', 'att3@m.com', 'att4@m.com'],
+    id: 'id-6',
+  },
+];
+
 const isTodaysMonth = (dtDay: DateTime) => {
   return DateTime.now().month === dtDay.month;
 };
@@ -16,11 +61,13 @@ const formatWeek = (week: DateTime[]) => {
       year: el.year,
       isToday: isToday(el),
       isTodaysMonth: isTodaysMonth(el),
+      events,
     };
   });
 };
 
 export const generateCalendarData = (year: number, month: number) => {
+  console.log(`generateCalendarData: `);
   const selectedMonth = DateTime.fromObject({ year, month });
   const daysInMonth = selectedMonth.daysInMonth;
   const firstDayOfMonth = selectedMonth.startOf('month');

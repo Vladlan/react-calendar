@@ -20,12 +20,12 @@
   }
 
   &-GridHeaderColumn {
-    border: 1px solid var(--calendar-border-main);
+    border: 1px solid var(--border-calendar-main);
     border-left: none;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex: 1 1 0;
+    width: 14.2857%;
     text-align: center;
     font-family: Roboto, Arial, sans-serif;
     color: var(--text-secondary);
@@ -47,7 +47,7 @@
   &-GridBodyRow {
     position: relative;
     overflow: hidden;
-    border-bottom: 1px solid var(--calendar-border-main);
+    border-bottom: 1px solid var(--border-calendar-main);
     display: flex;
     flex: 1 1 0;
   }

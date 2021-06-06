@@ -3,7 +3,7 @@
 .CalendarDay {
   font-size: 18px;
   line-height: 30px;
-  border-right: 1px solid var(--calendar-border-main);
+  border-right: 1px solid var(--border-calendar-main);
   color: var(--text-secondary);
   width: 14.2857%;
   overflow: hidden;
@@ -11,6 +11,10 @@
 
   &:hover {
     background-color: rgba(0, 217, 255, 0.07);
+  }
+
+  &:last-child {
+    border-right: none;
   }
 
   &-Number {
