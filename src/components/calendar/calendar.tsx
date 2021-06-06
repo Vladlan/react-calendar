@@ -4,7 +4,7 @@ import { DateTime, Info } from 'luxon';
 import { saveDayEventsToLocalStorage } from '../../utils';
 import { ACTIONS, AppContext } from '../../state';
 import { cn } from '@bem-react/classname';
-import { CalendarDay } from '../calendar-day';
+import { CalendarDay, CalendarDayData } from '../calendar-day';
 import { Modal } from '../modal';
 import { DayCard } from '../day-card';
 
@@ -22,7 +22,7 @@ export function Calendar() {
     },
     dispatch,
   } = useContext(AppContext);
-  const [showModal, setShow] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   const { day, month } = selectedDay || { day: 1, month: 1 };
   const modalTitle = `${day} ${DateTime.fromObject({ month }).monthLong}`;
@@ -45,7 +45,17 @@ export function Calendar() {
         month: currentMonth,
       },
     });
-    setShow(false);
+    setShowModal(false);
+  };
+
+  const showDay = (day: CalendarDayData) => {
+    setShowModal(true);
+    dispatch({
+      type: ACTIONS.SET_SELECTED_DAY,
+      payload: {
+        selectedDay: day,
+      },
+    });
   };
   return (
     <main className={bem()}>
@@ -53,7 +63,7 @@ export function Calendar() {
         <Modal
           title={modalTitle}
           onSubmit={updateDay}
-          onClose={() => setShow(false)}
+          onClose={() => setShowModal(false)}
           show={showModal}
         >
           <DayCard />
@@ -74,15 +84,7 @@ export function Calendar() {
                 <CalendarDay
                   key={`id-d-${dayIndex}`}
                   dayData={day}
-                  onClick={() => {
-                    setShow(true);
-                    dispatch({
-                      type: ACTIONS.SET_SELECTED_DAY,
-                      payload: {
-                        selectedDay: day,
-                      },
-                    });
-                  }}
+                  onClick={() => showDay(day)}
                 />
               ))}
             </div>
