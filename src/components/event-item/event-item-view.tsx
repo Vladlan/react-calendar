@@ -10,6 +10,7 @@ type EventItemViewProps = {
   onEditClick: () => void;
   onDeleteClick: (id: string) => void;
   isEditingEvent: boolean;
+  explicitEventDate: string;
 };
 
 export const EventItemView = memo(
@@ -18,6 +19,7 @@ export const EventItemView = memo(
     onEditClick,
     onDeleteClick,
     isEditingEvent,
+    explicitEventDate,
   }: EventItemViewProps) => {
     return (
       <>
@@ -34,7 +36,7 @@ export const EventItemView = memo(
                 {attendees.map((el, index) => (
                   <li className={bem('Attendee')} key={`id-att-${index}`}>
                     <a
-                      href={`mailto:${el}?subject=${description}&body=From ${start} to ${end}`}
+                      href={`mailto:${el}?subject=${description}&body=At ${explicitEventDate} from ${start} to ${end}`}
                       key={el}
                     >
                       {el}
