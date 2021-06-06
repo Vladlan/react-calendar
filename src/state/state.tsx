@@ -2,6 +2,7 @@ import { DateTime, Settings } from 'luxon';
 import { APP_DEFAULT_LOCALE } from '../constants';
 import { CalendarDayData } from '../components/calendar-day';
 import { generateCalendarData } from '../utils';
+import { AppNotification } from '../components/notifications-block';
 
 export type AppStateType = {
   currentYear: number;
@@ -10,6 +11,7 @@ export type AppStateType = {
   selectedDay: CalendarDayData;
   isAddingNewEvent: boolean;
   calendarData: CalendarDayData[][];
+  notifications: AppNotification[];
 };
 
 Settings.defaultLocale = APP_DEFAULT_LOCALE;
@@ -34,4 +36,5 @@ export const initialState = {
     currentDate.month,
     currentUser
   ),
+  notifications: [],
 };

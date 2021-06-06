@@ -1,9 +1,13 @@
 import './event-item.scss';
 import { cn } from '@bem-react/classname';
-import { useContext, useState, KeyboardEvent } from 'react';
+import { KeyboardEvent, useContext, useState } from 'react';
 import { CalendarDayEvent } from '../calendar-day';
 import { ACTIONS, AppContext } from '../../state';
 import { EVENT_INTERVALS } from '../../utils';
+import { validateEventDescription } from './utils/validate-event-description';
+import { NOTIFICATIONS_TYPES_ENUM } from '../../constants';
+import { validateEventTime } from './utils/validate-event-time';
+import { validateAttendee } from './utils/validate-attendee';
 
 const bem = cn('EventItem');
 
@@ -23,18 +27,64 @@ export const EventItemEditor = ({
   const [tempAttendee, setTempAttendee] = useState('');
   const [tempStartTime, setTempStartTime] = useState(start);
   const [tempEndTime, setTempEndTime] = useState(end);
-  const { dispatch } = useContext(AppContext);
+  const {
+    state: { selectedDay },
+    dispatch,
+  } = useContext(AppContext);
+  const { events } = selectedDay || { events: [] };
   const addTempAttendee = () => {
+    const attendeeEmailValidationErrMsg = validateAttendee(
+      tempAttendee,
+      tempAttendees
+    );
+    if (attendeeEmailValidationErrMsg) {
+      dispatch({
+        type: ACTIONS.ADD_NOTIFICATION,
+        payload: {
+          type: NOTIFICATIONS_TYPES_ENUM.ERROR,
+          message: attendeeEmailValidationErrMsg,
+        },
+      });
+      return;
+    }
     setTempAttendees([...tempAttendees, tempAttendee]);
     setTempAttendee('');
   };
-  const enterKeyPressHandler = (event: KeyboardEvent<HTMLInputElement>) => {
+  const addAttendeeOnEnterPress = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
       addTempAttendee();
     }
   };
 
   const saveEvent = () => {
+    const descriptionValidationErrMsg =
+      validateEventDescription(tempDescription);
+    if (descriptionValidationErrMsg) {
+      dispatch({
+        type: ACTIONS.ADD_NOTIFICATION,
+        payload: {
+          type: NOTIFICATIONS_TYPES_ENUM.ERROR,
+          message: descriptionValidationErrMsg,
+        },
+      });
+      return;
+    }
+    const eventTimeValidationErrMsg = validateEventTime(
+      tempStartTime,
+      tempEndTime,
+      events.filter((ev) => ev.id !== id)
+    );
+    if (eventTimeValidationErrMsg) {
+      dispatch({
+        type: ACTIONS.ADD_NOTIFICATION,
+        payload: {
+          type: NOTIFICATIONS_TYPES_ENUM.ERROR,
+          message: eventTimeValidationErrMsg,
+        },
+      });
+      return;
+    }
+
     const newEvent = {
       description: tempDescription,
       attendees: tempAttendees,
@@ -127,9 +177,10 @@ export const EventItemEditor = ({
               value={tempAttendee}
               id="event-attendee"
               type="email"
-              onKeyPress={(e) => enterKeyPressHandler(e)}
+              placeholder="attendee@mail.com"
+              onKeyPress={(e) => addAttendeeOnEnterPress(e)}
               onChange={(e) => {
-                setTempAttendee(e.target.value);
+                setTempAttendee(e.target.value.toLowerCase().trim());
               }}
             />
             <button

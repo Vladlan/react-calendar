@@ -29,7 +29,10 @@ export const EventItemView = memo(
           <ul className={bem('Attendees')}>
             {attendees.map((el, index) => (
               <li className={bem('Attendee')} key={`id-att-${index}`}>
-                <a href={`mailto:${el}`} key={el}>
+                <a
+                  href={`mailto:${el}?subject=${description}&body=From ${start} to ${end}`}
+                  key={el}
+                >
                   {el}
                 </a>
               </li>

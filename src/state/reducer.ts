@@ -7,6 +7,7 @@ import {
   generateEmptyEventData,
   sortByStartTime,
 } from '../utils';
+import { AppNotificationTypes } from '../components/notifications-block';
 
 export type AppPayloads = {
   [ACTIONS.CHANGE_CURRENT_YEAR]: {
@@ -33,8 +34,16 @@ export type AppPayloads = {
     year: number;
   };
   [ACTIONS.ADD_EMPTY_EVENT_FOR_SELECTED_DAY_EVENTS]: {};
+  [ACTIONS.ADD_NOTIFICATION]: {
+    message: string;
+    type: AppNotificationTypes;
+  };
+  [ACTIONS.REMOVE_NOTIFICATION]: {
+    notificationId: string;
+  };
 };
 
+// TODO: divide reducer to sub reducers
 export const reducer = (state: AppStateType, action: AppActions) => {
   switch (action.type) {
     case ACTIONS.CHANGE_CURRENT_YEAR:
@@ -117,6 +126,26 @@ export const reducer = (state: AppStateType, action: AppActions) => {
       return {
         ...state,
         calendarData: generateCalendarData(year, month, state.currentUser),
+      };
+    case ACTIONS.ADD_NOTIFICATION:
+      const { message, type } = action.payload;
+      return {
+        ...state,
+        notifications: [
+          {
+            type,
+            message,
+            id: nanoid(),
+          },
+        ],
+      };
+    case ACTIONS.REMOVE_NOTIFICATION:
+      const { notificationId } = action.payload;
+      return {
+        ...state,
+        notifications: state.notifications.filter(
+          (not) => not.id !== notificationId
+        ),
       };
     default:
       return state;

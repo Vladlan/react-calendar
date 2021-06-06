@@ -45,10 +45,10 @@
   }
 
   &-EventItem {
-    cursor: pointer;
     margin-bottom: toRem(2);
     padding: toRem(2);
     font-style: italic;
+    text-align: left;
 
     &:nth-child(5) {
       text-align: left;

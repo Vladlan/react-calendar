@@ -30,7 +30,7 @@
   &-EventInfoContainer {
     display: flex;
     flex-direction: column;
-    padding: toRem(24) toRem(8);
+    padding: toRem(24) toRem(16);
     flex-grow: 1;
 
     &_editing {
@@ -70,6 +70,10 @@
 
   &-AddAttendeeInput {
     width: 50%;
+
+    &::placeholder {
+      color: var(--text-secondary-light-1);
+    }
   }
 
   &-AddAttendeeBtn {

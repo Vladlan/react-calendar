@@ -28,30 +28,31 @@ export const EventItem = ({
       },
     });
   };
-  const startEventEditing = () => {
+  const startEditing = () => {
     setIsEditing(true);
   };
-  const finishEventEditing = () => {
+  const stopEditing = () => {
     setIsEditing(false);
+  };
+  const stopEventEditing = (id: string) => {
+    if (!id) {
+      deleteEvent(id);
+    }
+    stopEditing();
   };
   return (
     <li className={bem()} key={id}>
       {isEditing ? (
         <EventItemEditor
           eventData={eventData}
-          onSave={finishEventEditing}
-          onCancel={(id) => {
-            if (!id) {
-              deleteEvent(id);
-            }
-            finishEventEditing();
-          }}
+          onSave={stopEditing}
+          onCancel={stopEventEditing}
         />
       ) : (
         <EventItemView
           eventData={eventData}
           onDeleteClick={deleteEvent}
-          onEditClick={startEventEditing}
+          onEditClick={startEditing}
         />
       )}
     </li>

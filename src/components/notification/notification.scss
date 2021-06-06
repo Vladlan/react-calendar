@@ -1,0 +1,54 @@
+@import './src/scss-utils/index';
+
+.Notification {
+  position: relative;
+  display: flex;
+  width: 100%;
+  padding: toRem(16) toRem(16) toRem(16) toRem(24);
+  justify-content: space-between;
+  background-color: white;
+  border: 1px solid silver;
+  margin-top: toRem(16);
+  box-shadow: #00000054 1px 0 20px 1px;
+  color: black;
+
+  &-Type {
+    text-align: center;
+    font-weight: 500;
+    padding: 0 0 toRem(12) 0;
+    margin: 0;
+    display: flex;
+    font-size: toRem(14);
+  }
+
+  &-Message {
+    text-align: center;
+    margin: 0;
+    display: flex;
+    padding: 0;
+  }
+
+  &-CloseBlock {
+    display: flex;
+    flex: 0 1 0;
+    flex-direction: column;
+  }
+
+  &-DeleteBtn {
+    border: none;
+    border-radius: 50%;
+    height: toRem(20);
+    width: toRem(20);
+    font-size: toRem(16);
+    line-height: toRem(18);
+    background-color: transparent;
+    cursor: pointer;
+    color: var(--text-secondary);
+    padding: 0;
+    margin-left: toRem(4);
+
+    &:hover {
+      color: var(--text-main);
+    }
+  }
+}

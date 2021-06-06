@@ -12,7 +12,7 @@ export const DayCard = () => {
     dispatch,
   } = useContext(AppContext);
   const { events } = selectedDay || { events: [] };
-  let hasEmptyEvent = false;
+  let hasEmptyEvent = false; // TODO: remove this
   return (
     <div className={bem()}>
       <ul className={bem('EventsList')}>
