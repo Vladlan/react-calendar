@@ -9,9 +9,9 @@ export type AppStateType = {
   currentMonth: number;
   currentUser: string;
   selectedDay: CalendarDayData;
-  isAddingNewEvent: boolean;
   calendarData: CalendarDayData[][];
   notifications: AppNotification[];
+  isEditingEvent: boolean;
 };
 
 Settings.defaultLocale = APP_DEFAULT_LOCALE;
@@ -22,7 +22,7 @@ export const initialState = {
   currentYear: currentDate.year,
   currentMonth: currentDate.month,
   currentUser, // add login
-  isAddingNewEvent: false,
+  isEditingEvent: false,
   selectedDay: {
     day: 1,
     month: 1,

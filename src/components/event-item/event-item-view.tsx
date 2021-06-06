@@ -9,6 +9,7 @@ type EventItemViewProps = {
   eventData: CalendarDayEvent;
   onEditClick: () => void;
   onDeleteClick: (id: string) => void;
+  isEditingEvent: boolean;
 };
 
 export const EventItemView = memo(
@@ -16,6 +17,7 @@ export const EventItemView = memo(
     eventData: { id, start, end, description, attendees },
     onEditClick,
     onDeleteClick,
+    isEditingEvent,
   }: EventItemViewProps) => {
     return (
       <>
@@ -44,14 +46,16 @@ export const EventItemView = memo(
           )}
         </div>
         <div className={bem('EditContainer')}>
-          <button
-            className={bem('EditContainerBtn')}
-            onClick={() => {
-              onEditClick();
-            }}
-          >
-            Edit
-          </button>
+          {!isEditingEvent && (
+            <button
+              className={bem('EditContainerBtn')}
+              onClick={() => {
+                onEditClick();
+              }}
+            >
+              Edit
+            </button>
+          )}{' '}
           <button
             className={bem('EditContainerBtn')}
             onClick={() => {

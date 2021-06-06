@@ -41,6 +41,8 @@ export type AppPayloads = {
   [ACTIONS.REMOVE_NOTIFICATION]: {
     notificationId: string;
   };
+  [ACTIONS.STOP_EVENT_EDITING]: {};
+  [ACTIONS.START_EVENT_EDITING]: {};
 };
 
 // TODO: divide reducer to sub reducers
@@ -103,6 +105,7 @@ export const reducer = (state: AppStateType, action: AppActions) => {
             })
             .sort(sortByStartTime),
         },
+        isEditingEvent: false,
       };
     case ACTIONS.ADD_EMPTY_EVENT_FOR_SELECTED_DAY_EVENTS:
       return {
@@ -111,6 +114,7 @@ export const reducer = (state: AppStateType, action: AppActions) => {
           ...state.selectedDay,
           events: [...state.selectedDay.events, generateEmptyEventData()],
         },
+        isEditingEvent: true,
       };
     case ACTIONS.DELETE_EVENT_FROM_SELECTED_DAY:
       const { eventId } = action.payload;
@@ -146,6 +150,16 @@ export const reducer = (state: AppStateType, action: AppActions) => {
         notifications: state.notifications.filter(
           (not) => not.id !== notificationId
         ),
+      };
+    case ACTIONS.STOP_EVENT_EDITING:
+      return {
+        ...state,
+        isEditingEvent: false,
+      };
+    case ACTIONS.START_EVENT_EDITING:
+      return {
+        ...state,
+        isEditingEvent: true,
       };
     default:
       return state;

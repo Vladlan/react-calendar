@@ -8,26 +8,18 @@ const bem = cn('DayCard');
 
 export const DayCard = () => {
   const {
-    state: { selectedDay },
+    state: { selectedDay, isEditingEvent },
     dispatch,
   } = useContext(AppContext);
   const { events } = selectedDay;
-  let hasEmptyEvent = false; // TODO: remove this
   return (
     <div className={bem()}>
       <ul className={bem('EventsList')}>
         {events.map((dayEvent) => {
-          hasEmptyEvent = !dayEvent.id;
-          return (
-            <EventItem
-              key={dayEvent.id}
-              eventData={dayEvent}
-              inEditing={!dayEvent.id}
-            />
-          );
+          return <EventItem key={dayEvent.id} eventData={dayEvent} />;
         })}
       </ul>
-      {!hasEmptyEvent && (
+      {!isEditingEvent && (
         <div className={bem('AddEventBlock')}>
           <button
             className={bem('AddEventBtn')}

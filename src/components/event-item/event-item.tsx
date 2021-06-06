@@ -10,16 +10,15 @@ const bem = cn('EventItem');
 
 type EventItemProps = {
   eventData: CalendarDayEvent;
-  inEditing: boolean;
 };
 
-export const EventItem = ({
-  eventData: { id },
-  eventData,
-  inEditing,
-}: EventItemProps) => {
-  const [isEditing, setIsEditing] = useState(inEditing);
-  const { dispatch } = useContext(AppContext);
+export const EventItem = ({ eventData: { id }, eventData }: EventItemProps) => {
+  const [isEditing, setIsEditing] = useState(!id);
+  const {
+    state: { isEditingEvent },
+    dispatch,
+  } = useContext(AppContext);
+
   const deleteEvent = (id: string) => {
     dispatch({
       type: ACTIONS.DELETE_EVENT_FROM_SELECTED_DAY,
@@ -29,10 +28,18 @@ export const EventItem = ({
     });
   };
   const startEditing = () => {
+    dispatch({
+      type: ACTIONS.START_EVENT_EDITING,
+      payload: {},
+    });
     setIsEditing(true);
   };
   const stopEditing = () => {
     setIsEditing(false);
+    dispatch({
+      type: ACTIONS.STOP_EVENT_EDITING,
+      payload: {},
+    });
   };
   const stopEventEditing = (id: string) => {
     if (!id) {
@@ -51,6 +58,7 @@ export const EventItem = ({
       ) : (
         <EventItemView
           eventData={eventData}
+          isEditingEvent={isEditingEvent}
           onDeleteClick={deleteEvent}
           onEditClick={startEditing}
         />

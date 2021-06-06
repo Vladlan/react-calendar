@@ -45,10 +45,14 @@ export function Calendar() {
         month: currentMonth,
       },
     });
+    dispatch({
+      type: ACTIONS.STOP_EVENT_EDITING,
+      payload: {},
+    });
     setShowModal(false);
   };
 
-  const showDay = (day: CalendarDayData) => {
+  const showModalWithDayData = (day: CalendarDayData) => {
     setShowModal(true);
     dispatch({
       type: ACTIONS.SET_SELECTED_DAY,
@@ -57,13 +61,21 @@ export function Calendar() {
       },
     });
   };
+
+  const closeModal = () => {
+    setShowModal(false);
+    dispatch({
+      type: ACTIONS.STOP_EVENT_EDITING,
+      payload: {},
+    });
+  };
   return (
     <main className={bem()}>
       {showModal && (
         <Modal
           title={modalTitle}
           onSubmit={updateDay}
-          onClose={() => setShowModal(false)}
+          onClose={closeModal}
           show={showModal}
         >
           <DayCard />
@@ -84,7 +96,7 @@ export function Calendar() {
                 <CalendarDay
                   key={`id-d-${dayIndex}`}
                   dayData={day}
-                  onClick={() => showDay(day)}
+                  onClick={() => showModalWithDayData(day)}
                 />
               ))}
             </div>
