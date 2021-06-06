@@ -8,6 +8,7 @@
   width: 14.2857%;
   overflow: hidden;
   padding: 0 toRem(4);
+  cursor: pointer;
 
   &:hover {
     background-color: rgba(0, 217, 255, 0.07);
@@ -45,11 +46,11 @@
 
   &-EventItem {
     cursor: pointer;
-    margin-bottom: toRem(4);
+    margin-bottom: toRem(2);
     padding: toRem(2);
     font-style: italic;
 
-    &:last-child {
+    &:nth-child(5) {
       text-align: left;
       font-weight: bold;
       padding-left: toRem(8);

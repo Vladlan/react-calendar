@@ -7,12 +7,19 @@ const bem = cn('Modal');
 
 type ModalProps = {
   onClose: () => void;
+  onSubmit: () => void;
   title: string;
   children: ReactChild;
   show: boolean;
 };
 
-export const Modal = ({ show, onClose, title, children }: ModalProps) => {
+export const Modal = ({
+  show,
+  onClose,
+  title,
+  children,
+  onSubmit,
+}: ModalProps) => {
   const closeOnEscapeKeyDown = (e: KeyboardEvent) => {
     if ((e.charCode || e.keyCode) === 27) {
       onClose();
@@ -41,8 +48,11 @@ export const Modal = ({ show, onClose, title, children }: ModalProps) => {
         </div>
         <div className={bem('Body')}>{children}</div>
         <div className={bem('Footer')}>
+          <button onClick={onSubmit} className={bem('Btn', { close: true })}>
+            Save
+          </button>
           <button onClick={onClose} className={bem('Btn', { close: true })}>
-            Close
+            Cancel
           </button>
         </div>
       </div>

@@ -4,7 +4,7 @@ import { cn } from '@bem-react/classname';
 
 const bem = cn('CalendarDay');
 
-interface CalendarDayEvent {
+export interface CalendarDayEvent {
   start: string;
   end: string;
   description: string;

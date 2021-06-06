@@ -1,0 +1,188 @@
+@import './src/scss-utils/index';
+
+.EventItem {
+  display: flex;
+  border-bottom: 1px solid var(--border-calendar-secondary);
+
+  &-TimeContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-size: toRem(14);
+    padding: toRem(8);
+    border-right: 1px solid var(--border-calendar-secondary);
+
+    &_editing {
+      border-right: none;
+    }
+  }
+
+  &-EventStart,
+  &-EventEnd {
+    display: flex;
+    flex-direction: column;
+
+    & > select {
+      color: var(--text-secondary);
+    }
+  }
+
+  &-EventInfoContainer {
+    display: flex;
+    flex-direction: column;
+    padding: toRem(24) toRem(8);
+    flex-grow: 1;
+
+    &_editing {
+      padding: 0 toRem(8);
+    }
+  }
+
+  &-EventDescription {
+    font-style: italic;
+    margin-top: 0;
+  }
+
+  &-DescriptionForm {
+    display: flex;
+    flex-direction: column;
+    padding: toRem(8) 0;
+
+    & > textarea {
+      color: var(--text-secondary);
+      padding: toRem(4);
+    }
+  }
+
+  &-DescriptionFormTitle {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &-AddAttendeeInputContainer {
+    display: flex;
+
+    & > input {
+      color: var(--text-secondary);
+      padding: toRem(4);
+    }
+  }
+
+  &-AddAttendeeInput {
+    width: 50%;
+  }
+
+  &-AddAttendeeBtn {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    color: var(--text-secondary);
+    font-size: toRem(12);
+
+    &:hover {
+      color: var(--text-main);
+    }
+  }
+
+  &-AttendeesContainer {
+    padding: toRem(8) 0;
+  }
+
+  &-AttendeesTitle {
+    padding-bottom: toRem(4);
+    font-size: toRem(16);
+    font-weight: normal;
+    margin: 0;
+  }
+
+  &-Attendees {
+    display: flex;
+    flex-wrap: wrap;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  &-AttendeeEmail {
+    display: flex;
+  }
+
+  &-Attendee {
+    display: flex;
+    margin-right: toRem(8);
+    justify-content: center;
+    align-items: center;
+    height: toRem(24);
+
+    &_deletable {
+      border: 1px solid;
+      padding: toRem(4) toRem(16);
+      border-radius: toRem(24);
+      margin: 0 toRem(8) toRem(8) 0;
+    }
+
+    & > a {
+      color: var(--text-secondary);
+      text-decoration: none;
+
+      &:hover {
+        color: var(--text-main);
+      }
+    }
+  }
+
+  &-DeleteAttendeeBtn {
+    border: none;
+    border-radius: 50%;
+    height: toRem(20);
+    width: toRem(20);
+    font-size: toRem(16);
+    line-height: toRem(18);
+    background-color: transparent;
+    cursor: pointer;
+    color: var(--text-secondary);
+    padding: 0;
+    margin-left: toRem(4);
+
+    &:hover {
+      color: var(--text-main);
+    }
+  }
+
+  &-EditContainer {
+    display: flex;
+    flex-direction: column;
+    align-self: end;
+    padding: toRem(4);
+  }
+
+  &-EditContainerBtn {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    color: var(--text-secondary);
+    font-size: toRem(12);
+
+    &:hover {
+      color: var(--text-main);
+    }
+  }
+
+  &-AddEventBlock {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+
+  &-AddEventBtn {
+    background-color: transparent;
+    cursor: pointer;
+    color: var(--text-secondary);
+    border: none;
+
+    &:hover {
+      color: var(--text-main);
+    }
+  }
+}

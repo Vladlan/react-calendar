@@ -31,6 +31,12 @@ export function Header() {
           month: currentMonth - 1,
         },
       });
+      dispatch({
+        type: ACTIONS.CHANGE_CURRENT_MONTH,
+        payload: {
+          month: currentMonth - 1,
+        },
+      });
     }
   };
 
