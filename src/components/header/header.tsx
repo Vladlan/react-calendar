@@ -4,7 +4,7 @@ import { ACTIONS, AppContext } from '../../state';
 import { DateTime } from 'luxon';
 import { cn } from '@bem-react/classname';
 import { useHistory } from 'react-router-dom';
-import { setCurrentUserInLocalStorage } from '../../utils/set-current-user-in-local-storage';
+import { setCurrentUserInLocalStorage } from '../../utils';
 
 const bem = cn('Header');
 
