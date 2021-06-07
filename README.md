@@ -21,4 +21,5 @@ already exists (they should receive a warning when they try.)
 • Calendar creation process can be optimized (to have only one save)  
 • At least utils should be covered with tests  
 • Sub reducers should be added  
-• Barrel files for components should be provided
+• Barrel files for components folder should be provided  
+• Forms can be implemented with formik
