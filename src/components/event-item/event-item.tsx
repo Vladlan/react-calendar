@@ -39,19 +39,13 @@ export const EventItem = ({ eventData: { id }, eventData }: EventItemProps) => {
   const stopEditing = () => {
     setIsEditing(false);
   };
-  const stopEventEditing = (id: string) => {
-    if (!id) {
-      deleteEvent(id);
-    }
-    stopEditing();
-  };
   return (
     <li className={bem()} key={id}>
       {isEditing ? (
         <EventItemEditor
           eventData={eventData}
           onSave={stopEditing}
-          onCancel={stopEventEditing}
+          onCancel={stopEditing}
         />
       ) : (
         <EventItemView

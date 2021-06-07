@@ -22,7 +22,7 @@ export const validateEventTime = (
   if (!endTime) return YOU_SHOULD_SELECT_EVENT_END_TIME;
   const startTimeMins = getMinutesFromEventTime(startTime);
   const endTimeMins = getMinutesFromEventTime(endTime);
-  if (startTimeMins > endTimeMins)
+  if (startTimeMins >= endTimeMins)
     return EVENT_END_TIME_SHOULD_BE_AFTER_EVENT_START_TIME;
   const hasIntersectionWithSiblingEvents = !!eventsSiblings.find(ev => checkEventIntersection(startTimeMins, endTimeMins, ev));
   if (hasIntersectionWithSiblingEvents)
