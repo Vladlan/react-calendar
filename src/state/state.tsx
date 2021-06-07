@@ -1,9 +1,8 @@
 import { DateTime, Settings } from 'luxon';
 import { APP_DEFAULT_LOCALE } from '../constants';
 import { CalendarDayData } from '../components/calendar-day';
-import { generateCalendarData } from '../utils';
+import { generateCalendarData, getCurrentUserFromLocalStorage } from '../utils';
 import { AppNotification } from '../components/notifications-block';
-import { getCurrentUserFromLocalStorage } from '../utils/get-current-user-from-local-storage';
 
 export type AppStateType = {
   currentYear: number;
@@ -12,7 +11,6 @@ export type AppStateType = {
   selectedDay: CalendarDayData;
   calendarData: CalendarDayData[][];
   notifications: AppNotification[];
-  isEditingEvent: boolean;
 };
 
 Settings.defaultLocale = APP_DEFAULT_LOCALE;
@@ -22,7 +20,6 @@ export const initialState = {
   currentYear: currentDate.year,
   currentMonth: currentDate.month,
   currentUser: getCurrentUserFromLocalStorage(),
-  isEditingEvent: false,
   selectedDay: {
     day: 1,
     month: 1,

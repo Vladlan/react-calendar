@@ -5,9 +5,10 @@ import { CalendarDayEvent } from '../calendar-day';
 import { ACTIONS, AppContext } from '../../state';
 import { EVENT_INTERVALS } from '../../utils';
 import { validateEventDescription } from './utils/validate-event-description';
-import { NOTIFICATIONS_TYPES_ENUM } from '../../constants';
 import { validateEventTime } from './utils/validate-event-time';
 import { validateAttendee } from './utils/validate-attendee';
+import { showNotification } from '../../utils/show-notification';
+import { nanoid } from 'nanoid';
 
 const bem = cn('EventItem');
 
@@ -38,13 +39,7 @@ export const EventItemEditor = ({
       tempAttendees
     );
     if (attendeeEmailValidationErrMsg) {
-      dispatch({
-        type: ACTIONS.ADD_NOTIFICATION,
-        payload: {
-          type: NOTIFICATIONS_TYPES_ENUM.ERROR,
-          message: attendeeEmailValidationErrMsg,
-        },
-      });
+      showNotification(dispatch, attendeeEmailValidationErrMsg);
       return;
     }
     setTempAttendees([...tempAttendees, tempAttendee]);
@@ -60,13 +55,7 @@ export const EventItemEditor = ({
     const descriptionValidationErrMsg =
       validateEventDescription(tempDescription);
     if (descriptionValidationErrMsg) {
-      dispatch({
-        type: ACTIONS.ADD_NOTIFICATION,
-        payload: {
-          type: NOTIFICATIONS_TYPES_ENUM.ERROR,
-          message: descriptionValidationErrMsg,
-        },
-      });
+      showNotification(dispatch, descriptionValidationErrMsg);
       return;
     }
     const eventTimeValidationErrMsg = validateEventTime(
@@ -75,13 +64,7 @@ export const EventItemEditor = ({
       events.filter((ev) => ev.id !== id)
     );
     if (eventTimeValidationErrMsg) {
-      dispatch({
-        type: ACTIONS.ADD_NOTIFICATION,
-        payload: {
-          type: NOTIFICATIONS_TYPES_ENUM.ERROR,
-          message: eventTimeValidationErrMsg,
-        },
-      });
+      showNotification(dispatch, eventTimeValidationErrMsg);
       return;
     }
 
@@ -92,12 +75,17 @@ export const EventItemEditor = ({
       end: tempEndTime,
       id,
     };
-    dispatch({
-      type: ACTIONS.UPDATE_SELECTED_DAY_EVENTS,
-      payload: {
-        newEvent,
-      },
-    });
+    if (id) {
+      dispatch({
+        type: ACTIONS.UPDATE_SELECTED_DAY_EVENTS,
+        payload: newEvent,
+      });
+    } else {
+      dispatch({
+        type: ACTIONS.ADD_NEW_EVENT_FOR_SELECTED_DAY_EVENTS,
+        payload: { ...newEvent, id: nanoid() },
+      });
+    }
     onSave();
   };
 

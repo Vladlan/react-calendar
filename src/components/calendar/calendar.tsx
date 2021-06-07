@@ -7,10 +7,6 @@ import { cn } from '@bem-react/classname';
 import { CalendarDay, CalendarDayData } from '../calendar-day';
 import { Modal } from '../modal';
 import { DayCard } from '../day-card';
-import {
-  NOTIFICATIONS_TYPES_ENUM,
-  YOU_SHOULD_FINISH_EDITING_THE_EVENT_TO_SAVE_THE_DAY,
-} from '../../constants';
 
 const bem = cn('Calendar');
 
@@ -23,7 +19,6 @@ export function Calendar() {
       calendarData,
       currentYear,
       currentMonth,
-      isEditingEvent,
     },
     dispatch,
   } = useContext(AppContext);
@@ -33,16 +28,6 @@ export function Calendar() {
   const modalTitle = `${day} ${DateTime.fromObject({ month }).monthLong}`;
 
   const updateDay = () => {
-    if (isEditingEvent) {
-      dispatch({
-        type: ACTIONS.ADD_NOTIFICATION,
-        payload: {
-          type: NOTIFICATIONS_TYPES_ENUM.ERROR,
-          message: YOU_SHOULD_FINISH_EDITING_THE_EVENT_TO_SAVE_THE_DAY,
-        },
-      });
-      return;
-    }
     const { month, day } = selectedDay;
     const editedDayWeekISO = DateTime.fromObject({
       month,
@@ -60,10 +45,6 @@ export function Calendar() {
         month: currentMonth,
       },
     });
-    dispatch({
-      type: ACTIONS.STOP_EVENT_EDITING,
-      payload: {},
-    });
     setShowModal(false);
   };
 
@@ -71,18 +52,12 @@ export function Calendar() {
     setShowModal(true);
     dispatch({
       type: ACTIONS.SET_SELECTED_DAY,
-      payload: {
-        selectedDay: day,
-      },
+      payload: day,
     });
   };
 
   const closeModal = () => {
     setShowModal(false);
-    dispatch({
-      type: ACTIONS.STOP_EVENT_EDITING,
-      payload: {},
-    });
   };
   return (
     <main className={bem()}>

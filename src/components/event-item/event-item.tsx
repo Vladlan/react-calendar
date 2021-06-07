@@ -17,7 +17,6 @@ export const EventItem = ({ eventData: { id }, eventData }: EventItemProps) => {
   const [isEditing, setIsEditing] = useState(!id);
   const {
     state: {
-      isEditingEvent,
       selectedDay: { day, month, year },
     },
     dispatch,
@@ -35,18 +34,10 @@ export const EventItem = ({ eventData: { id }, eventData }: EventItemProps) => {
     });
   };
   const startEditing = () => {
-    dispatch({
-      type: ACTIONS.START_EVENT_EDITING,
-      payload: {},
-    });
     setIsEditing(true);
   };
   const stopEditing = () => {
     setIsEditing(false);
-    dispatch({
-      type: ACTIONS.STOP_EVENT_EDITING,
-      payload: {},
-    });
   };
   const stopEventEditing = (id: string) => {
     if (!id) {
@@ -66,7 +57,6 @@ export const EventItem = ({ eventData: { id }, eventData }: EventItemProps) => {
         <EventItemView
           explicitEventDate={explicitEventDate}
           eventData={eventData}
-          isEditingEvent={isEditingEvent}
           onDeleteClick={deleteEvent}
           onEditClick={startEditing}
         />

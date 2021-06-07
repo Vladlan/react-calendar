@@ -1,13 +1,8 @@
 import { AppStateType } from './state';
 import { ACTIONS, AppActions } from './actions';
 import { CalendarDayData, CalendarDayEvent } from '../components/calendar-day';
-import { nanoid } from 'nanoid';
-import {
-  generateCalendarData,
-  generateEmptyEventData,
-  sortByStartTime,
-} from '../utils';
-import { AppNotificationTypes } from '../components/notifications-block';
+import { generateCalendarData, sortByStartTime } from '../utils';
+import { AppNotification } from '../components/notifications-block';
 
 export type AppPayloads = {
   [ACTIONS.CHANGE_CURRENT_YEAR]: {
@@ -20,12 +15,9 @@ export type AppPayloads = {
     month: number;
     year: number;
   };
-  [ACTIONS.SET_SELECTED_DAY]: {
-    selectedDay: CalendarDayData;
-  };
-  [ACTIONS.UPDATE_SELECTED_DAY_EVENTS]: {
-    newEvent: CalendarDayEvent;
-  };
+  [ACTIONS.SET_SELECTED_DAY]: CalendarDayData;
+  [ACTIONS.UPDATE_SELECTED_DAY_EVENTS]: CalendarDayEvent;
+  [ACTIONS.ADD_NEW_EVENT_FOR_SELECTED_DAY_EVENTS]: CalendarDayEvent;
   [ACTIONS.DELETE_EVENT_FROM_SELECTED_DAY]: {
     eventId: string;
   };
@@ -33,17 +25,11 @@ export type AppPayloads = {
     month: number;
     year: number;
   };
-  [ACTIONS.ADD_EMPTY_EVENT_FOR_SELECTED_DAY_EVENTS]: {};
-  [ACTIONS.ADD_NOTIFICATION]: {
-    message: string;
-    type: AppNotificationTypes;
-  };
+  [ACTIONS.ADD_NOTIFICATION]: AppNotification;
   [ACTIONS.REMOVE_NOTIFICATION]: {
     notificationId: string;
   };
-  [ACTIONS.STOP_EVENT_EDITING]: {};
-  [ACTIONS.START_EVENT_EDITING]: {};
-  [ACTIONS.LOGOUT]: {};
+  [ACTIONS.LOGOUT]: undefined;
   [ACTIONS.LOGIN]: {
     login: string;
   };
@@ -86,39 +72,29 @@ export const reducer = (state: AppStateType, action: AppActions) => {
     case ACTIONS.SET_SELECTED_DAY:
       return {
         ...state,
-        selectedDay: action.payload.selectedDay,
+        selectedDay: action.payload,
       };
     case ACTIONS.UPDATE_SELECTED_DAY_EVENTS:
-      const { id, description, attendees, start, end } =
-        action.payload.newEvent;
+      const updatedEvent = action.payload;
       return {
         ...state,
         selectedDay: {
           ...state.selectedDay,
           events: state.selectedDay.events
             .map((el) => {
-              return el.id === id
-                ? {
-                    description,
-                    attendees,
-                    start,
-                    end,
-                    id: id || nanoid(),
-                  }
-                : el;
+              return el.id === updatedEvent.id ? updatedEvent : el;
             })
             .sort(sortByStartTime),
         },
-        isEditingEvent: false,
       };
-    case ACTIONS.ADD_EMPTY_EVENT_FOR_SELECTED_DAY_EVENTS:
+    case ACTIONS.ADD_NEW_EVENT_FOR_SELECTED_DAY_EVENTS:
+      const newEvent = action.payload;
       return {
         ...state,
         selectedDay: {
           ...state.selectedDay,
-          events: [...state.selectedDay.events, generateEmptyEventData()],
+          events: [...state.selectedDay.events, newEvent].sort(sortByStartTime),
         },
-        isEditingEvent: true,
       };
     case ACTIONS.DELETE_EVENT_FROM_SELECTED_DAY:
       const { eventId } = action.payload;
@@ -136,16 +112,10 @@ export const reducer = (state: AppStateType, action: AppActions) => {
         calendarData: generateCalendarData(year, month, state.currentUser),
       };
     case ACTIONS.ADD_NOTIFICATION:
-      const { message, type } = action.payload;
+      const newNotification = action.payload;
       return {
         ...state,
-        notifications: [
-          {
-            type,
-            message,
-            id: nanoid(),
-          },
-        ],
+        notifications: [...state.notifications, newNotification],
       };
     case ACTIONS.REMOVE_NOTIFICATION:
       const { notificationId } = action.payload;
@@ -154,16 +124,6 @@ export const reducer = (state: AppStateType, action: AppActions) => {
         notifications: state.notifications.filter(
           (not) => not.id !== notificationId
         ),
-      };
-    case ACTIONS.STOP_EVENT_EDITING:
-      return {
-        ...state,
-        isEditingEvent: false,
-      };
-    case ACTIONS.START_EVENT_EDITING:
-      return {
-        ...state,
-        isEditingEvent: true,
       };
     case ACTIONS.LOGIN:
       const { login } = action.payload;

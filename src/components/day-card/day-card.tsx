@@ -1,16 +1,18 @@
 import './day-card.scss';
 import { cn } from '@bem-react/classname';
-import { useContext } from 'react';
-import { ACTIONS, AppContext } from '../../state';
+import { useContext, useState } from 'react';
+import { AppContext } from '../../state';
 import { EventItem } from '../event-item';
+import { EventItemEditor } from '../event-item/event-item-editor';
+import { generateEmptyEventData } from '../../utils';
 
 const bem = cn('DayCard');
 
 export const DayCard = () => {
   const {
-    state: { selectedDay, isEditingEvent },
-    dispatch,
+    state: { selectedDay },
   } = useContext(AppContext);
+  const [isCreatingNewEvent, setIsCreatingNewEvent] = useState(false);
   const { events } = selectedDay;
   return (
     <div className={bem()}>
@@ -18,16 +20,26 @@ export const DayCard = () => {
         {events.map((dayEvent) => {
           return <EventItem key={dayEvent.id} eventData={dayEvent} />;
         })}
+        {isCreatingNewEvent && (
+          <li className="EventItem">
+            <EventItemEditor
+              eventData={generateEmptyEventData()}
+              onSave={() => {
+                setIsCreatingNewEvent(false);
+              }}
+              onCancel={() => {
+                setIsCreatingNewEvent(false);
+              }}
+            />
+          </li>
+        )}
       </ul>
-      {!isEditingEvent && (
+      {!isCreatingNewEvent && (
         <div className={bem('AddEventBlock')}>
           <button
             className={bem('AddEventBtn')}
             onClick={() => {
-              dispatch({
-                type: ACTIONS.ADD_EMPTY_EVENT_FOR_SELECTED_DAY_EVENTS,
-                payload: {},
-              });
+              setIsCreatingNewEvent(true);
             }}
           >
             Add Event

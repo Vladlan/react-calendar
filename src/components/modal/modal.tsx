@@ -47,7 +47,7 @@ export const Modal = ({
             Save
           </button>
           <button onClick={onClose} className={bem('Btn', { close: true })}>
-            Cancel
+            Close
           </button>
         </div>
       </div>

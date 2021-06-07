@@ -65,7 +65,6 @@ export function Header() {
   const logout = () => {
     dispatch({
       type: ACTIONS.LOGOUT,
-      payload: {},
     });
     setCurrentUserInLocalStorage('');
     routerHistory.push('/');
