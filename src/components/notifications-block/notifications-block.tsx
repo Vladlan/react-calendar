@@ -27,23 +27,26 @@ export function NotificationsBlock() {
     });
   };
 
-  return (
-    <aside
-      className={bem({
-        visible: notifications.length,
-        hidden: !notifications.length,
-      })}
-    >
-      {notifications.map(({ id, type, message }) => {
-        return (
-          <Notification
-            key={id}
-            type={type}
-            message={message}
-            onClose={() => removeNotification(id)}
-          />
-        );
-      })}
-    </aside>
-  );
+  if (notifications.length)
+    return (
+      <aside
+        className={bem({
+          visible: notifications.length,
+          hidden: !notifications.length,
+        })}
+      >
+        {notifications.map(({ id, type, message }) => {
+          return (
+            <Notification
+              key={id}
+              type={type}
+              message={message}
+              onClose={() => removeNotification(id)}
+            />
+          );
+        })}
+      </aside>
+    );
+
+  return <></>;
 }

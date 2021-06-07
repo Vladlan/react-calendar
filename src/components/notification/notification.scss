@@ -9,7 +9,7 @@
   background-color: white;
   border: 1px solid silver;
   margin-top: toRem(16);
-  box-shadow: #00000054 1px 0 20px 1px;
+  box-shadow: #00000054 toRem(1) 0 toRem(20) toRem(1);
   color: black;
 
   &-Type {

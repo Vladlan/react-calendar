@@ -3,6 +3,7 @@ import { APP_DEFAULT_LOCALE } from '../constants';
 import { CalendarDayData } from '../components/calendar-day';
 import { generateCalendarData } from '../utils';
 import { AppNotification } from '../components/notifications-block';
+import { getCurrentUserFromLocalStorage } from '../utils/get-current-user-from-local-storage';
 
 export type AppStateType = {
   currentYear: number;
@@ -16,12 +17,11 @@ export type AppStateType = {
 
 Settings.defaultLocale = APP_DEFAULT_LOCALE;
 const currentDate = DateTime.now();
-const currentUser = 'vlad';
 
 export const initialState = {
   currentYear: currentDate.year,
   currentMonth: currentDate.month,
-  currentUser, // add login
+  currentUser: getCurrentUserFromLocalStorage(),
   isEditingEvent: false,
   selectedDay: {
     day: 1,
@@ -34,7 +34,7 @@ export const initialState = {
   calendarData: generateCalendarData(
     currentDate.year,
     currentDate.month,
-    currentUser
+    getCurrentUserFromLocalStorage()
   ),
   notifications: [],
 };

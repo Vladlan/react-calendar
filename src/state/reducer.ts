@@ -43,6 +43,10 @@ export type AppPayloads = {
   };
   [ACTIONS.STOP_EVENT_EDITING]: {};
   [ACTIONS.START_EVENT_EDITING]: {};
+  [ACTIONS.LOGOUT]: {};
+  [ACTIONS.LOGIN]: {
+    login: string;
+  };
 };
 
 // TODO: divide reducer to sub reducers
@@ -160,6 +164,27 @@ export const reducer = (state: AppStateType, action: AppActions) => {
       return {
         ...state,
         isEditingEvent: true,
+      };
+    case ACTIONS.LOGIN:
+      const { login } = action.payload;
+      return {
+        ...state,
+        currentUser: login,
+        calendarData: generateCalendarData(
+          state.currentYear,
+          state.currentMonth,
+          login
+        ),
+      };
+    case ACTIONS.LOGOUT:
+      return {
+        ...state,
+        currentUser: '',
+        calendarData: generateCalendarData(
+          state.currentYear,
+          state.currentMonth,
+          ''
+        ),
       };
     default:
       return state;

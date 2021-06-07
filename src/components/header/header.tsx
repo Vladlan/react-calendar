@@ -3,6 +3,8 @@ import './header.scss';
 import { ACTIONS, AppContext } from '../../state';
 import { DateTime } from 'luxon';
 import { cn } from '@bem-react/classname';
+import { useHistory } from 'react-router-dom';
+import { setCurrentUserInLocalStorage } from '../../utils/set-current-user-in-local-storage';
 
 const bem = cn('Header');
 
@@ -59,6 +61,16 @@ export function Header() {
     }
   };
 
+  const routerHistory = useHistory();
+  const logout = () => {
+    dispatch({
+      type: ACTIONS.LOGOUT,
+      payload: {},
+    });
+    setCurrentUserInLocalStorage('');
+    routerHistory.push('/');
+  };
+
   return (
     <header className={bem()}>
       <h1 className={bem('Logo')}>React Calendar</h1>
@@ -68,9 +80,15 @@ export function Header() {
         </button>
         <button className={bem('CalendarSwitcherBtn')} onClick={incrementMonth}>
           <span>{'>'}</span>
+          {/*TODO: replace with icons library*/}
         </button>
         <span className={bem('CalendarSwitcherMonth')}>{currentMonthName}</span>
         <span className={bem('CalendarSwitcherYear')}>{currentYear}</span>
+      </div>
+      <div className={bem('LogoutBtnContainer')}>
+        <button className={bem('LogoutBtn')} onClick={logout}>
+          Logout
+        </button>
       </div>
     </header>
   );

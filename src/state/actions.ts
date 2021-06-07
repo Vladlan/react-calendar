@@ -24,6 +24,8 @@ export enum ACTIONS {
   REMOVE_NOTIFICATION = 'REMOVE_NOTIFICATION',
   STOP_EVENT_EDITING = 'STOP_EVENT_EDITING',
   START_EVENT_EDITING = 'START_EVENT_EDITING',
+  LOGIN = 'LOGIN',
+  LOGOUT = 'LOGOUT',
 }
 
 export type AppActions = ActionMap<AppPayloads>[keyof ActionMap<AppPayloads>];

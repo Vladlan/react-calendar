@@ -20,13 +20,12 @@ export const Modal = ({
   children,
   onSubmit,
 }: ModalProps) => {
-  const closeOnEscapeKeyDown = (e: KeyboardEvent) => {
-    if ((e.charCode || e.keyCode) === 27) {
-      onClose();
-    }
-  };
-
   useEffect(() => {
+    const closeOnEscapeKeyDown = (e: KeyboardEvent) => {
+      if ((e.charCode || e.keyCode) === 27) {
+        onClose();
+      }
+    };
     document.body.addEventListener('keydown', closeOnEscapeKeyDown);
     return function cleanup() {
       document.body.removeEventListener('keydown', closeOnEscapeKeyDown);

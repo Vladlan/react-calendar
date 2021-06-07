@@ -24,6 +24,7 @@
 
   &-CalendarSwitcher {
     padding-left: toRem(8);
+    margin: 0 auto 0 0;
   }
 
   &-CalendarSwitcherBtn {
@@ -33,11 +34,11 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    border: 1px solid silver;
-    border-radius: 50%;
+    border: none;
     height: toRem(25);
     width: toRem(25);
     margin: 0 toRem(4);
+    color: var(--text-secondary);
 
     & > span {
       height: toRem(20);
@@ -50,6 +51,7 @@
 
     &:hover {
       color: grey;
+      color: var(--text-main);
     }
   }
 
@@ -59,5 +61,24 @@
     font-weight: bold;
     padding: toRem(4) toRem(8);
     text-align: left;
+  }
+
+  &-LogoutBtnContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 toRem(16);
+  }
+
+  &-LogoutBtn {
+    border: none;
+    background-color: transparent;
+    display: flex;
+    color: var(--text-secondary);
+    cursor: pointer;
+
+    &:hover {
+      color: var(--text-main);
+    }
   }
 }

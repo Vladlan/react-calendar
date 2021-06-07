@@ -10,7 +10,7 @@ const isToday = (dtDay: DateTime) => {
   return DateTime.now().toISOWeekDate() === dtDay.toISOWeekDate();
 };
 
-const formatWeek = (week: DateTime[], userId: string): CalendarDayData[] => {
+const formatWeek = (week: DateTime[], userName: string): CalendarDayData[] => {
   return week.map((el) => {
     const ISOWeekDay = el.toISOWeekDate();
     return {
@@ -19,7 +19,7 @@ const formatWeek = (week: DateTime[], userId: string): CalendarDayData[] => {
       year: el.year,
       isToday: isToday(el),
       isTodaysMonth: isTodaysMonth(el),
-      events: getDayEventsFromLocalStorage(userId, ISOWeekDay),
+      events: getDayEventsFromLocalStorage(userName, ISOWeekDay),
     };
   });
 };
@@ -27,8 +27,9 @@ const formatWeek = (week: DateTime[], userId: string): CalendarDayData[] => {
 export const generateCalendarData = (
   year: number,
   month: number,
-  userId: string
+  userName: string
 ): CalendarDayData[][] => {
+  if (!userName) return [];
   const selectedMonth = DateTime.fromObject({ year, month });
   const daysInMonth = selectedMonth.daysInMonth;
   const firstDayOfMonth = selectedMonth.startOf('month');
@@ -47,7 +48,7 @@ export const generateCalendarData = (
       week.push(day);
     }
     if (week.length === 7) {
-      currMonthData.push(formatWeek(week, userId));
+      currMonthData.push(formatWeek(week, userName));
       week = [];
     }
   }
@@ -56,7 +57,7 @@ export const generateCalendarData = (
     for (let k = week.length - 1; k + 1 < 7; k++) {
       week.push(week[k].plus({ days: 1 }));
     }
-    currMonthData.push(formatWeek(week, userId));
+    currMonthData.push(formatWeek(week, userName));
   }
   return currMonthData;
 };

@@ -6,6 +6,11 @@ export const saveDayEventsToLocalStorage = (
   ISOWeekDate: string,
   dayEvents: CalendarDayEvent[]
 ) => {
+  if (!dayEvents) return;
   const dayKey = getDayKey(userId, ISOWeekDate);
-  localStorage.setItem(dayKey, JSON.stringify(dayEvents));
+  if (dayEvents.length) {
+    localStorage.setItem(dayKey, JSON.stringify(dayEvents));
+  } else {
+    localStorage.removeItem(dayKey);
+  }
 };
