@@ -22,7 +22,7 @@ export function Calendar() {
     },
     dispatch,
   } = useContext(AppContext);
-  const [showModal, setShowModal] = useState(false);
+  const [isModalShown, setIsModalShown] = useState(false);
 
   const { day, month } = selectedDay;
   const modalTitle = `${day} ${DateTime.fromObject({ month }).monthLong}`;
@@ -44,11 +44,11 @@ export function Calendar() {
         month: currentMonth,
       },
     });
-    setShowModal(false);
+    setIsModalShown(false);
   };
 
   const showModalWithDayData = (day: CalendarDayData) => {
-    setShowModal(true);
+    setIsModalShown(true);
     dispatch({
       type: ACTIONS.SET_SELECTED_DAY,
       payload: day,
@@ -56,7 +56,7 @@ export function Calendar() {
   };
 
   const closeModal = () => {
-    setShowModal(false);
+    setIsModalShown(false);
   };
   return (
     <main className={bem()}>
@@ -64,7 +64,7 @@ export function Calendar() {
         title={modalTitle}
         onSubmit={updateDayInCalendar} // TODO: make save on events save
         onClose={closeModal}
-        isShown={showModal}
+        isShown={isModalShown}
       >
         <DayCard />
       </Modal>
