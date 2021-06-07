@@ -13,6 +13,15 @@
   justify-content: center;
   transition: all 0.3s ease-in-out;
 
+  &_opened {
+    transform: translateY(0vh);
+    opacity: 1;
+  }
+  &_closed {
+    transform: translateY(-100vh);
+    opacity: 0;
+  }
+
   &-Content {
     width: 70%;
     background-color: #fff;

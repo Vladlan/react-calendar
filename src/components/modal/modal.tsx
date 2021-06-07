@@ -10,11 +10,11 @@ type ModalProps = {
   onSubmit: () => void;
   title: string;
   children: ReactChild;
-  show: boolean;
+  isShown: boolean;
 };
 
 export const Modal = ({
-  show,
+  isShown,
   onClose,
   title,
   children,
@@ -30,16 +30,12 @@ export const Modal = ({
     return function cleanup() {
       document.body.removeEventListener('keydown', closeOnEscapeKeyDown);
     };
-  }, []);
+  }, [onClose]);
 
   return createPortal(
     <div
-      className={bem()}
+      className={bem({ opened: isShown, closed: !isShown })}
       onClick={onClose}
-      style={{
-        transform: show ? 'translateY(0vh)' : 'translateY(-100vh)',
-        opacity: show ? '1' : '0',
-      }}
     >
       <div className={bem('Content')} onClick={(e) => e.stopPropagation()}>
         <div className={bem('Header')}>

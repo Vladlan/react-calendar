@@ -86,16 +86,14 @@ export function Calendar() {
   };
   return (
     <main className={bem()}>
-      {showModal && (
-        <Modal
-          title={modalTitle}
-          onSubmit={updateDay}
-          onClose={closeModal}
-          show={showModal}
-        >
-          <DayCard />
-        </Modal>
-      )}
+      <Modal
+        title={modalTitle}
+        onSubmit={updateDay}
+        onClose={closeModal}
+        isShown={showModal}
+      >
+        <DayCard />
+      </Modal>
       <div className={bem('Grid')}>
         <div className={bem('GridHeader')}>
           {weekdays.map((dayName, index) => (
