@@ -26,8 +26,8 @@ export const EventItemEditor = ({
   const [tempDescription, setTempDescription] = useState(description);
   const [tempAttendees, setTempAttendees] = useState(attendees);
   const [tempAttendee, setTempAttendee] = useState('');
-  const [tempStartTime, setTempStartTime] = useState(EVENT_INTERVALS[0]);
-  const [tempEndTime, setTempEndTime] = useState(EVENT_INTERVALS[0]);
+  const [tempStartTime, setTempStartTime] = useState(start);
+  const [tempEndTime, setTempEndTime] = useState(end);
   const {
     state: { selectedDay },
     dispatch,

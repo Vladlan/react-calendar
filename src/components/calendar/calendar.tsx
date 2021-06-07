@@ -24,11 +24,10 @@ export function Calendar() {
   } = useContext(AppContext);
   const [showModal, setShowModal] = useState(false);
 
-  const { day, month } = selectedDay || { day: 1, month: 1 };
+  const { day, month } = selectedDay;
   const modalTitle = `${day} ${DateTime.fromObject({ month }).monthLong}`;
 
-  const updateDay = () => {
-    const { month, day } = selectedDay;
+  const updateDayInCalendar = () => {
     const editedDayWeekISO = DateTime.fromObject({
       month,
       day,
@@ -63,7 +62,7 @@ export function Calendar() {
     <main className={bem()}>
       <Modal
         title={modalTitle}
-        onSubmit={updateDay}
+        onSubmit={updateDayInCalendar} // TODO: make save on events save
         onClose={closeModal}
         isShown={showModal}
       >
