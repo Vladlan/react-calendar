@@ -8,3 +8,4 @@ export * from './get-day-events-from-local-storage';
 export * from './save-day-events-to-local-storage';
 export * from './set-current-user-in-local-storage';
 export * from './get-current-user-from-local-storage';
+export * from './show-notification';

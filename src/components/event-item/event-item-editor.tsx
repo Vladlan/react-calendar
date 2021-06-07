@@ -3,11 +3,8 @@ import { cn } from '@bem-react/classname';
 import { KeyboardEvent, useContext, useState } from 'react';
 import { CalendarDayEvent } from '../calendar-day';
 import { ACTIONS, AppContext } from '../../state';
-import { EVENT_INTERVALS } from '../../utils';
-import { validateEventDescription } from './utils/validate-event-description';
-import { validateEventTime } from './utils/validate-event-time';
-import { validateAttendee } from './utils/validate-attendee';
-import { showNotification } from '../../utils/show-notification';
+import { EVENT_INTERVALS, showNotification } from '../../utils';
+import { validateAttendee, validateEventTime, validateEventDescription } from './utils/validation';
 import { nanoid } from 'nanoid';
 
 const bem = cn('EventItem');

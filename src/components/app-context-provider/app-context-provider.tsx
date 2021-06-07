@@ -1,7 +1,7 @@
-import React, { useReducer } from 'react';
+import { useReducer, FC } from 'react';
 import { AppContext, initialState, reducer } from '../../state';
 
-export const AppContextProvider: React.FC = ({ children }) => {
+export const AppContextProvider: FC = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   return (
     <AppContext.Provider value={{ state, dispatch }}>

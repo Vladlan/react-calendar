@@ -2,7 +2,7 @@ import {
   ATTENDEE_EMAIL_IS_NOT_VALID,
   THIS_ATTENDEE_ALREADY_ADDED,
   YOU_PROVIDED_EMPTY_ATTENDEE_EMAIL,
-} from '../../../constants';
+} from '../../../../constants';
 
 export const validateAttendee = (
   attendeeEmail: string,

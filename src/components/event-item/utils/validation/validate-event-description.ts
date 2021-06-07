@@ -1,7 +1,7 @@
 import {
   DESCRIPTION_TOO_LONG,
   DESCRIPTION_TOO_SHORT,
-} from '../../../constants';
+} from '../../../../constants';
 
 export const validateEventDescription = (eventDescription: string) => {
   if (eventDescription.length < 6) return DESCRIPTION_TOO_SHORT;
