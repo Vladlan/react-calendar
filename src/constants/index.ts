@@ -19,7 +19,5 @@ export const THIS_ATTENDEE_ALREADY_ADDED = 'This attendee already added';
 export const ATTENDEE_EMAIL_IS_NOT_VALID = 'Attendee email is not valid';
 export const YOU_PROVIDED_EMPTY_ATTENDEE_EMAIL =
   'You provided empty attendee email';
-export const YOU_SHOULD_FINISH_EDITING_THE_EVENT_TO_SAVE_THE_DAY =
-  'You should finish editing the event to save the day';
 
 export const CURRENT_USER_KEY = 'currentUser';
