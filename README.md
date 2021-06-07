@@ -1,4 +1,4 @@
-To start app locally: `npm start`
+To start app locally: `npm start` (you should run `npm i` before first app start)
 
 **Completed:**
 
@@ -18,7 +18,7 @@ already exists (they should receive a warning when they try.)
 • Supply Tests (Out of time)
 
 **What can be improved (Author thoughts):**  
-• Calendar creation process can be optimized (to have only one save)  
+• Calendar creation process (UX) can be improved (to have only one save)  
 • At least utils should be covered with tests  
 • Sub reducers should be added  
 • Barrel files for components folder should be provided  
