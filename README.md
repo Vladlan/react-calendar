@@ -16,3 +16,9 @@ already exists (they should receive a warning when they try.)
 
 **Not Completed:**  
 • Supply Tests (Out of time)
+
+**What can be improved (Author thoughts):**  
+• Calendar creation process can be optimized (to have only one save)  
+• At least utils should be covered with tests  
+• Sub reducers should be added  
+• Barrel files for components should be provided
