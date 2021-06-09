@@ -21,11 +21,11 @@ export function Calendar() {
   const modalTitle = `${day} ${DateTime.fromObject({ month }).monthLong}`;
 
   const showModalWithDayData = (day: CalendarDayData) => {
-    setIsModalShown(true);
     dispatch({
       type: ACTIONS.SET_SELECTED_DAY,
       payload: day,
     });
+    setIsModalShown(true);
   };
 
   const closeModal = () => {

@@ -19,6 +19,7 @@ export const Notification = ({
   return (
     <section
       className={bem({
+        slideIn: true,
         error: type === NOTIFICATIONS_TYPES_ENUM.ERROR,
         warning: type === NOTIFICATIONS_TYPES_ENUM.WARNING,
         message: type === NOTIFICATIONS_TYPES_ENUM.MESSAGE,

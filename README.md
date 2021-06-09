@@ -18,6 +18,6 @@ To start app locally: `npm start` (you should run `npm i` before first app start
 **What can be improved (Author thoughts):**  
 • At least utils should be covered with tests  
 • Sub reducers should be added  
-• Barrel files for components folder should be provided  
 • Forms can be implemented with formik  
-• Add redirection when entering /calendar from a link on a new browser
+• Add redirection when entering /calendar from a link on a new browser  
+• Use hash router

@@ -31,7 +31,7 @@ export function NotificationsBlock() {
     return (
       <aside
         className={bem({
-          visible: notifications.length,
+          visible: !!notifications.length,
           hidden: !notifications.length,
         })}
       >

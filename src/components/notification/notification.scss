@@ -1,5 +1,15 @@
 @import './src/scss-utils/index';
 
+@keyframes slideIn {
+  from {
+    transform: translateY(100%);
+  }
+
+  to {
+    transform: translateY(0%);
+  }
+}
+
 .Notification {
   position: relative;
   display: flex;
@@ -11,6 +21,12 @@
   margin-top: toRem(16);
   box-shadow: #00000054 toRem(1) 0 toRem(20) toRem(1);
   color: black;
+
+  &_slideIn {
+    animation-name: slideIn;
+    animation-duration: 0.3s;
+    animation-timing-function: ease-in-out;
+  }
 
   &-Type {
     text-align: center;

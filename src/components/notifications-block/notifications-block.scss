@@ -11,14 +11,19 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  opacity: 0;
 
   max-width: toRem(400);
   padding: 0 toRem(24);
 
+  transition: opacity 0.3s ease-out;
+
   &_visible {
     display: flex;
+    opacity: 1;
   }
   &_hidden {
     display: none;
+    opacity: 0;
   }
 }
