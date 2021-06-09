@@ -1,7 +1,6 @@
 import { useContext, useState } from 'react';
 import './calendar.scss';
 import { DateTime, Info } from 'luxon';
-import { saveDayEventsToLocalStorage } from '../../utils';
 import { ACTIONS, AppContext } from '../../state';
 import { cn } from '@bem-react/classname';
 import { CalendarDay, CalendarDayData } from '../calendar-day';
@@ -13,39 +12,13 @@ const bem = cn('Calendar');
 export function Calendar() {
   const weekdays = Info.weekdays('long');
   const {
-    state: {
-      selectedDay,
-      currentUser,
-      calendarData,
-      currentYear,
-      currentMonth,
-    },
+    state: { selectedDay, calendarData },
     dispatch,
   } = useContext(AppContext);
   const [isModalShown, setIsModalShown] = useState(false);
 
   const { day, month } = selectedDay;
   const modalTitle = `${day} ${DateTime.fromObject({ month }).monthLong}`;
-
-  const updateDayInCalendar = () => {
-    const editedDayWeekISO = DateTime.fromObject({
-      month,
-      day,
-    }).toISOWeekDate();
-    saveDayEventsToLocalStorage(
-      currentUser,
-      editedDayWeekISO,
-      selectedDay.events.filter((el) => el.id)
-    );
-    dispatch({
-      type: ACTIONS.UPDATE_CALENDAR_DATA,
-      payload: {
-        year: currentYear,
-        month: currentMonth,
-      },
-    });
-    setIsModalShown(false);
-  };
 
   const showModalWithDayData = (day: CalendarDayData) => {
     setIsModalShown(true);
@@ -60,12 +33,7 @@ export function Calendar() {
   };
   return (
     <main className={bem()}>
-      <Modal
-        title={modalTitle}
-        onSubmit={updateDayInCalendar} // TODO: make save on events save
-        onClose={closeModal}
-        isShown={isModalShown}
-      >
+      <Modal title={modalTitle} onClose={closeModal} isShown={isModalShown}>
         <DayCard />
       </Modal>
       <div className={bem('Grid')}>

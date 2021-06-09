@@ -6,6 +6,7 @@ import { ACTIONS, AppContext } from '../../state';
 import { EventItemView } from './event-item-view';
 import { EventItemEditor } from './event-item-editor';
 import { DateTime } from 'luxon';
+import { saveDayEventsToLocalStorage } from '../../utils';
 
 const bem = cn('EventItem');
 
@@ -18,6 +19,9 @@ export const EventItem = ({ eventData: { id }, eventData }: EventItemProps) => {
   const {
     state: {
       selectedDay: { day, month, year, events },
+      currentUser,
+      currentYear,
+      currentMonth,
     },
     dispatch,
   } = useContext(AppContext);
@@ -32,7 +36,22 @@ export const EventItem = ({ eventData: { id }, eventData }: EventItemProps) => {
         eventId: id,
       },
     });
+    const editedDayWeekISO = DateTime.fromObject({
+      month,
+      day,
+    }).toISOWeekDate();
+    saveDayEventsToLocalStorage(currentUser, editedDayWeekISO, [
+      ...events.filter((ev) => ev.id !== id),
+    ]);
+    dispatch({
+      type: ACTIONS.UPDATE_CALENDAR_DATA,
+      payload: {
+        year: currentYear,
+        month: currentMonth,
+      },
+    });
   };
+
   const startEditing = () => {
     setIsEditing(true);
   };

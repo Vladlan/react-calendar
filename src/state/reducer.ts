@@ -16,8 +16,7 @@ export type AppPayloads = {
     year: number;
   };
   [ACTIONS.SET_SELECTED_DAY]: CalendarDayData;
-  [ACTIONS.UPDATE_SELECTED_DAY_EVENTS]: CalendarDayEvent;
-  [ACTIONS.ADD_NEW_EVENT_FOR_SELECTED_DAY_EVENTS]: CalendarDayEvent;
+  [ACTIONS.REPLACE_SELECTED_DAY_EVENTS]: CalendarDayEvent[];
   [ACTIONS.DELETE_EVENT_FROM_SELECTED_DAY]: {
     eventId: string;
   };
@@ -74,26 +73,13 @@ export const reducer = (state: AppStateType, action: AppActions) => {
         ...state,
         selectedDay: action.payload,
       };
-    case ACTIONS.UPDATE_SELECTED_DAY_EVENTS:
-      const updatedEvent = action.payload;
+    case ACTIONS.REPLACE_SELECTED_DAY_EVENTS:
+      const newEvents = action.payload;
       return {
         ...state,
         selectedDay: {
           ...state.selectedDay,
-          events: state.selectedDay.events
-            .map((el) => {
-              return el.id === updatedEvent.id ? updatedEvent : el;
-            })
-            .sort(sortByStartTime),
-        },
-      };
-    case ACTIONS.ADD_NEW_EVENT_FOR_SELECTED_DAY_EVENTS:
-      const newEvent = action.payload;
-      return {
-        ...state,
-        selectedDay: {
-          ...state.selectedDay,
-          events: [...state.selectedDay.events, newEvent].sort(sortByStartTime),
+          events: newEvents.sort(sortByStartTime),
         },
       };
     case ACTIONS.DELETE_EVENT_FROM_SELECTED_DAY:

@@ -3,7 +3,11 @@ import { cn } from '@bem-react/classname';
 import { KeyboardEvent, useContext, useState } from 'react';
 import { CalendarDayEvent } from '../calendar-day';
 import { ACTIONS, AppContext } from '../../state';
-import { EVENT_INTERVALS, showNotification } from '../../utils';
+import {
+  EVENT_INTERVALS,
+  saveDayEventsToLocalStorage,
+  showNotification,
+} from '../../utils';
 import {
   validateAttendee,
   validateEventTime,
@@ -11,6 +15,7 @@ import {
 } from './utils/validation';
 import { nanoid } from 'nanoid';
 import { KEY_ENTER } from '../../constants';
+import { DateTime } from 'luxon';
 
 const bem = cn('EventItem');
 
@@ -32,7 +37,15 @@ export const EventItemEditor = ({
   const [tempAttendee, setTempAttendee] = useState('');
   const [tempStartTime, setTempStartTime] = useState(start);
   const [tempEndTime, setTempEndTime] = useState(end);
-  const { dispatch } = useContext(AppContext);
+  const {
+    state: {
+      selectedDay: { day, month, events },
+      currentUser,
+      currentYear,
+      currentMonth,
+    },
+    dispatch,
+  } = useContext(AppContext);
   const addTempAttendee = () => {
     const attendeeEmailValidationErrMsg = validateAttendee(
       tempAttendee,
@@ -67,25 +80,36 @@ export const EventItemEditor = ({
       showNotification(dispatch, eventTimeValidationErrMsg);
       return;
     }
-
     const newEvent = {
       description: tempDescription,
       attendees: tempAttendees,
       start: tempStartTime,
       end: tempEndTime,
-      id,
+      id: id || nanoid(),
     };
-    if (id) {
-      dispatch({
-        type: ACTIONS.UPDATE_SELECTED_DAY_EVENTS,
-        payload: newEvent,
-      });
-    } else {
-      dispatch({
-        type: ACTIONS.ADD_NEW_EVENT_FOR_SELECTED_DAY_EVENTS,
-        payload: { ...newEvent, id: nanoid() },
-      });
-    }
+    const newSelectedDayEvents = id
+      ? events.map((ev) => (ev.id === newEvent.id ? newEvent : ev))
+      : [...events, newEvent];
+    dispatch({
+      type: ACTIONS.REPLACE_SELECTED_DAY_EVENTS,
+      payload: newSelectedDayEvents,
+    });
+    const editedDayWeekISO = DateTime.fromObject({
+      month,
+      day,
+    }).toISOWeekDate();
+    saveDayEventsToLocalStorage(
+      currentUser,
+      editedDayWeekISO,
+      newSelectedDayEvents
+    );
+    dispatch({
+      type: ACTIONS.UPDATE_CALENDAR_DATA,
+      payload: {
+        year: currentYear,
+        month: currentMonth,
+      },
+    });
     onSave();
   };
 

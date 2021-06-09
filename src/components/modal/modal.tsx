@@ -8,7 +8,7 @@ const bem = cn('Modal');
 
 type ModalProps = {
   onClose: () => void;
-  onSubmit: () => void;
+  onSubmit?: () => void;
   title: string;
   children: ReactChild;
   isShown: boolean;
@@ -44,9 +44,11 @@ export const Modal = ({
         </div>
         <div className={bem('Body')}>{children}</div>
         <div className={bem('Footer')}>
-          <button onClick={onSubmit} className={bem('Btn', { close: true })}>
-            Save
-          </button>
+          {onSubmit && (
+            <button onClick={onSubmit} className={bem('Btn', { close: true })}>
+              Save
+            </button>
+          )}
           <button onClick={onClose} className={bem('Btn', { close: true })}>
             Close
           </button>
