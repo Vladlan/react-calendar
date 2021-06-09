@@ -35,7 +35,6 @@ export const EventItemView = memo(
                   <li className={bem('Attendee')} key={`id-att-${index}`}>
                     <a
                       href={`mailto:${el}?subject=${description}&body=At ${explicitEventDate} from ${start} to ${end}`}
-                      key={el}
                     >
                       {el}
                     </a>
@@ -46,12 +45,7 @@ export const EventItemView = memo(
           )}
         </div>
         <div className={bem('EditContainer')}>
-          <button
-            className={bem('EditContainerBtn')}
-            onClick={() => {
-              onEditClick();
-            }}
-          >
+          <button className={bem('EditContainerBtn')} onClick={onEditClick}>
             Edit
           </button>
           <button

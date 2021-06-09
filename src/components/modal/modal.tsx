@@ -2,6 +2,7 @@ import { ReactChild, useEffect } from 'react';
 import './modal.scss';
 import { cn } from '@bem-react/classname';
 import { createPortal } from 'react-dom';
+import { KEY_ESCAPE } from '../../constants';
 
 const bem = cn('Modal');
 
@@ -22,7 +23,7 @@ export const Modal = ({
 }: ModalProps) => {
   useEffect(() => {
     const closeOnEscapeKeyDown = (e: KeyboardEvent) => {
-      if ((e.charCode || e.keyCode) === 27) {
+      if (e.code === KEY_ESCAPE) {
         onClose();
       }
     };

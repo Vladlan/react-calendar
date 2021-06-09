@@ -4,6 +4,7 @@ import { KeyboardEvent, useContext, useState } from 'react';
 import { ACTIONS, AppContext } from '../../state';
 import { useHistory } from 'react-router-dom';
 import { setCurrentUserInLocalStorage } from '../../utils';
+import { KEY_ENTER } from '../../constants';
 const bem = cn('LoginPage');
 
 export const LoginPage = () => {
@@ -24,7 +25,7 @@ export const LoginPage = () => {
     }
   };
   const goToCalendarOnEnter = (event: KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter') {
+    if (event.key === KEY_ENTER) {
       goToCalendar();
     }
   };

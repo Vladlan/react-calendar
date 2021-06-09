@@ -4,8 +4,13 @@ import { KeyboardEvent, useContext, useState } from 'react';
 import { CalendarDayEvent } from '../calendar-day';
 import { ACTIONS, AppContext } from '../../state';
 import { EVENT_INTERVALS, showNotification } from '../../utils';
-import { validateAttendee, validateEventTime, validateEventDescription } from './utils/validation';
+import {
+  validateAttendee,
+  validateEventTime,
+  validateEventDescription,
+} from './utils/validation';
 import { nanoid } from 'nanoid';
+import { KEY_ENTER } from '../../constants';
 
 const bem = cn('EventItem');
 
@@ -13,23 +18,21 @@ type EventItemEditorProps = {
   eventData: CalendarDayEvent;
   onSave: () => void;
   onCancel: (id: string) => void;
+  eventsSiblings: CalendarDayEvent[];
 };
 
 export const EventItemEditor = ({
   eventData: { id, start, end, description, attendees },
   onSave,
   onCancel,
+  eventsSiblings,
 }: EventItemEditorProps) => {
   const [tempDescription, setTempDescription] = useState(description);
   const [tempAttendees, setTempAttendees] = useState(attendees);
   const [tempAttendee, setTempAttendee] = useState('');
   const [tempStartTime, setTempStartTime] = useState(start);
   const [tempEndTime, setTempEndTime] = useState(end);
-  const {
-    state: { selectedDay },
-    dispatch,
-  } = useContext(AppContext);
-  const { events } = selectedDay || { events: [] };
+  const { dispatch } = useContext(AppContext);
   const addTempAttendee = () => {
     const attendeeEmailValidationErrMsg = validateAttendee(
       tempAttendee,
@@ -43,7 +46,7 @@ export const EventItemEditor = ({
     setTempAttendee('');
   };
   const addAttendeeOnEnterPress = (event: KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter') {
+    if (event.key === KEY_ENTER) {
       addTempAttendee();
     }
   };
@@ -58,7 +61,7 @@ export const EventItemEditor = ({
     const eventTimeValidationErrMsg = validateEventTime(
       tempStartTime,
       tempEndTime,
-      events.filter((ev) => ev.id !== id)
+      eventsSiblings.filter((ev) => ev.id !== id)
     );
     if (eventTimeValidationErrMsg) {
       showNotification(dispatch, eventTimeValidationErrMsg);

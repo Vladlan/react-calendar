@@ -17,7 +17,7 @@ export const EventItem = ({ eventData: { id }, eventData }: EventItemProps) => {
   const [isEditing, setIsEditing] = useState(!id);
   const {
     state: {
-      selectedDay: { day, month, year },
+      selectedDay: { day, month, year, events },
     },
     dispatch,
   } = useContext(AppContext);
@@ -43,6 +43,7 @@ export const EventItem = ({ eventData: { id }, eventData }: EventItemProps) => {
     <li className={bem()} key={id}>
       {isEditing ? (
         <EventItemEditor
+          eventsSiblings={events}
           eventData={eventData}
           onSave={stopEditing}
           onCancel={stopEditing}

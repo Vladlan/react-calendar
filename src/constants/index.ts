@@ -21,3 +21,6 @@ export const YOU_PROVIDED_EMPTY_ATTENDEE_EMAIL =
   'You provided empty attendee email';
 
 export const CURRENT_USER_KEY = 'currentUser';
+
+export const KEY_ENTER = 'Enter';
+export const KEY_ESCAPE = 'Escape';

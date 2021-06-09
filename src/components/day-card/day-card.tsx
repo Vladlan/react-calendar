@@ -10,10 +10,11 @@ const bem = cn('DayCard');
 
 export const DayCard = () => {
   const {
-    state: { selectedDay },
+    state: {
+      selectedDay: { events },
+    },
   } = useContext(AppContext);
   const [isCreatingNewEvent, setIsCreatingNewEvent] = useState(false);
-  const { events } = selectedDay;
   return (
     <div className={bem()}>
       <ul className={bem('EventsList')}>
@@ -23,6 +24,7 @@ export const DayCard = () => {
         {isCreatingNewEvent && (
           <li className="EventItem">
             <EventItemEditor
+              eventsSiblings={events}
               eventData={generateEmptyEventData()}
               onSave={() => {
                 setIsCreatingNewEvent(false);
