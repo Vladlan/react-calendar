@@ -121,12 +121,13 @@ export const EventItemEditor = ({
       <div className={bem('TimeContainer', { editing: true })}>
         <div className={bem('EventStart')}>
           <label
-            htmlFor="event-description"
+            htmlFor="event-star-time-select"
             className={bem('DescriptionFormTitle')}
           >
             Start time:
           </label>
           <select
+            id="event-star-time-select"
             value={tempStartTime}
             onChange={(e) => {
               setTempStartTime(e.target.value);
@@ -141,12 +142,13 @@ export const EventItemEditor = ({
         </div>
         <div className={bem('EventEnd')}>
           <label
-            htmlFor="event-description"
+            htmlFor="event-end-time-select"
             className={bem('DescriptionFormTitle')}
           >
             End time:
           </label>
           <select
+            id="event-end-time-select"
             value={tempEndTime}
             onChange={(e) => {
               setTempEndTime(e.target.value);
