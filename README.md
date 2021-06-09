@@ -18,6 +18,7 @@ To start app locally: `npm start` (you should run `npm i` before first app start
 **What can be improved (Author thoughts):**  
 • At least utils should be covered with tests  
 • Sub reducers should be added  
+• Move dispatch to action creators  
 • Forms can be implemented with formik  
 • Add redirection when entering /calendar from a link on a new browser  
 • Use hash router
