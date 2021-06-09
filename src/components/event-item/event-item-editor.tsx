@@ -8,11 +8,7 @@ import {
   saveDayEventsToLocalStorage,
   showNotification,
 } from '../../utils';
-import {
-  validateAttendee,
-  validateEventTime,
-  validateEventDescription,
-} from './utils/validation';
+import { validateAttendee, validateEvent } from './utils/validation';
 import { nanoid } from 'nanoid';
 import { KEY_ENTER } from '../../constants';
 import { DateTime } from 'luxon';
@@ -65,19 +61,15 @@ export const EventItemEditor = ({
   };
 
   const saveEvent = () => {
-    const descriptionValidationErrMsg =
-      validateEventDescription(tempDescription);
-    if (descriptionValidationErrMsg) {
-      showNotification(dispatch, descriptionValidationErrMsg);
-      return;
-    }
-    const eventTimeValidationErrMsg = validateEventTime(
+    const eventValidationErrMsg = validateEvent(
+      tempDescription,
       tempStartTime,
       tempEndTime,
-      eventsSiblings.filter((ev) => ev.id !== id)
+      eventsSiblings,
+      id
     );
-    if (eventTimeValidationErrMsg) {
-      showNotification(dispatch, eventTimeValidationErrMsg);
+    if (eventValidationErrMsg) {
+      showNotification(dispatch, eventValidationErrMsg);
       return;
     }
     const newEvent = {

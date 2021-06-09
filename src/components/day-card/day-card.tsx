@@ -2,8 +2,7 @@ import './day-card.scss';
 import { cn } from '@bem-react/classname';
 import { useContext, useState } from 'react';
 import { AppContext } from '../../state';
-import { EventItem } from '../event-item';
-import { EventItemEditor } from '../event-item/event-item-editor';
+import { EventItem, EventItemEditor } from '../event-item';
 import { generateEmptyEventData } from '../../utils';
 
 const bem = cn('DayCard');
