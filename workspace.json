@@ -1,6 +1,133 @@
 {
   "version": 2,
   "projects": {
+    "angular-hello": {
+      "projectType": "application",
+      "root": "apps/angular-hello",
+      "sourceRoot": "apps/angular-hello/src",
+      "prefix": "temp-workspace",
+      "targets": {
+        "build": {
+          "executor": "@angular-devkit/build-angular:browser",
+          "outputs": [
+            "{options.outputPath}"
+          ],
+          "options": {
+            "outputPath": "dist/apps/angular-hello",
+            "index": "apps/angular-hello/src/index.html",
+            "main": "apps/angular-hello/src/main.ts",
+            "polyfills": "apps/angular-hello/src/polyfills.ts",
+            "tsConfig": "apps/angular-hello/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "apps/angular-hello/src/favicon.ico",
+              "apps/angular-hello/src/assets"
+            ],
+            "styles": [
+              "apps/angular-hello/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/angular-hello/src/environments/environment.ts",
+                  "with": "apps/angular-hello/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "executor": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "angular-hello:build:production"
+            },
+            "development": {
+              "browserTarget": "angular-hello:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "executor": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "angular-hello:build"
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/angular-hello/src/**/*.ts",
+              "apps/angular-hello/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/apps/angular-hello"
+          ],
+          "options": {
+            "jestConfig": "apps/angular-hello/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "angular-hello-e2e": {
+      "root": "apps/angular-hello-e2e",
+      "sourceRoot": "apps/angular-hello-e2e/src",
+      "projectType": "application",
+      "targets": {
+        "e2e": {
+          "executor": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/angular-hello-e2e/cypress.json",
+            "tsConfig": "apps/angular-hello-e2e/tsconfig.e2e.json",
+            "devServerTarget": "angular-hello:serve:development"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "angular-hello:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/angular-hello-e2e/**/*.{js,ts}"
+            ]
+          }
+        }
+      }
+    },
     "react-calendar": {
       "root": "apps/react-calendar",
       "sourceRoot": "apps/react-calendar/src",
@@ -8,7 +135,9 @@
       "targets": {
         "build": {
           "executor": "@nrwl/workspace:run-commands",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "command": "node ../../node_modules/react-app-rewired/bin/index.js build",
             "cwd": "apps/react-calendar",
@@ -58,7 +187,9 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/react-calendar-e2e/**/*.{js,ts}"]
+            "lintFilePatterns": [
+              "apps/react-calendar-e2e/**/*.{js,ts}"
+            ]
           }
         },
         "e2e-run": {
@@ -72,7 +203,9 @@
         "e2e-serve": {
           "executor": "@nrwl/workspace:run-commands",
           "options": {
-            "commands": ["nx serve react-calendar"],
+            "commands": [
+              "nx serve react-calendar"
+            ],
             "readyWhen": "can now view"
           }
         }
@@ -98,6 +231,20 @@
         "linter": "eslint",
         "strict": true
       }
+    },
+    "@nrwl/angular:application": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest"
+    },
+    "@nrwl/angular:component": {
+      "style": "scss"
     }
   },
   "defaultProject": "react-calendar"

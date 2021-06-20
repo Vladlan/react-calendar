@@ -1,3 +1,3 @@
 module.exports = {
-  projects: ['<rootDir>/apps/react-calendar'],
+  projects: ['<rootDir>/apps/react-calendar', '<rootDir>/apps/angular-hello'],
 };

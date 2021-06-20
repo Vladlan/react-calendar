@@ -14,12 +14,7 @@
     "default": {
       "runner": "@nrwl/nx-cloud",
       "options": {
-        "cacheableOperations": [
-          "build",
-          "lint",
-          "test",
-          "e2e"
-        ],
+        "cacheableOperations": ["build", "lint", "test", "e2e"],
         "accessToken": "MTA2NzdmYzgtZGVhNy00NTZhLWIzMDUtNWM0ZWQ5OTQ2NGZmfHJlYWQtd3JpdGU=",
         "canTrackAnalytics": false,
         "showUsageWarnings": true
@@ -27,14 +22,19 @@
     }
   },
   "projects": {
+    "angular-hello": {
+      "tags": []
+    },
+    "angular-hello-e2e": {
+      "tags": [],
+      "implicitDependencies": ["angular-hello"]
+    },
     "react-calendar": {
       "tags": []
     },
     "react-calendar-e2e": {
       "tags": [],
-      "implicitDependencies": [
-        "react-calendar"
-      ]
+      "implicitDependencies": ["react-calendar"]
     }
   }
 }
