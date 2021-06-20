@@ -5,12 +5,14 @@ import { ACTIONS, AppContext } from '../../state';
 import { useHistory } from 'react-router-dom';
 import { setCurrentUserInLocalStorage } from '../../utils';
 import { KEY_ENTER } from '../../constants';
+import { helloLogger } from '@loggers';
 const bem = cn('LoginPage');
 
 export const LoginPage = () => {
   const [login, setLogin] = useState('');
   const { dispatch } = useContext(AppContext);
   const routerHistory = useHistory();
+  helloLogger.sayHi();
 
   const goToCalendar = () => {
     if (login) {
