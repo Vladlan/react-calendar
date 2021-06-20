@@ -1,0 +1,40 @@
+{
+  "npmScope": "temp-workspace",
+  "affected": {
+    "defaultBase": "master"
+  },
+  "implicitDependencies": {
+    "package.json": {
+      "dependencies": "*",
+      "devDependencies": "*"
+    },
+    ".eslintrc.json": "*"
+  },
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "@nrwl/nx-cloud",
+      "options": {
+        "cacheableOperations": [
+          "build",
+          "lint",
+          "test",
+          "e2e"
+        ],
+        "accessToken": "MTA2NzdmYzgtZGVhNy00NTZhLWIzMDUtNWM0ZWQ5OTQ2NGZmfHJlYWQtd3JpdGU=",
+        "canTrackAnalytics": false,
+        "showUsageWarnings": true
+      }
+    }
+  },
+  "projects": {
+    "react-calendar": {
+      "tags": []
+    },
+    "react-calendar-e2e": {
+      "tags": [],
+      "implicitDependencies": [
+        "react-calendar"
+      ]
+    }
+  }
+}

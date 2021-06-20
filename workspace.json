@@ -1,0 +1,104 @@
+{
+  "version": 2,
+  "projects": {
+    "react-calendar": {
+      "root": "apps/react-calendar",
+      "sourceRoot": "apps/react-calendar/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/workspace:run-commands",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "command": "node ../../node_modules/react-app-rewired/bin/index.js build",
+            "cwd": "apps/react-calendar",
+            "outputPath": "dist/apps/react-calendar"
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/workspace:run-commands",
+          "outputs": [],
+          "options": {
+            "command": "node ../../node_modules/react-app-rewired/bin/index.js start",
+            "cwd": "apps/react-calendar"
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/workspace:run-commands",
+          "outputs": [],
+          "options": {
+            "command": "node ../../node_modules/.bin/eslint src/**/*.tsx src/**/*.ts",
+            "cwd": "apps/react-calendar"
+          }
+        },
+        "test": {
+          "executor": "@nrwl/workspace:run-commands",
+          "outputs": [],
+          "options": {
+            "command": "node ../../node_modules/react-app-rewired/bin/index.js test --watchAll=false",
+            "cwd": "apps/react-calendar"
+          }
+        }
+      }
+    },
+    "react-calendar-e2e": {
+      "root": "apps/react-calendar-e2e",
+      "sourceRoot": "apps/react-calendar-e2e/src",
+      "projectType": "application",
+      "targets": {
+        "e2e": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "nx e2e-serve react-calendar-e2e",
+              "nx e2e-run react-calendar-e2e"
+            ]
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/react-calendar-e2e/**/*.{js,ts}"]
+          }
+        },
+        "e2e-run": {
+          "executor": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/react-calendar-e2e/cypress.json",
+            "tsConfig": "apps/react-calendar-e2e/tsconfig.e2e.json",
+            "baseUrl": "http://localhost:3000"
+          }
+        },
+        "e2e-serve": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["nx serve react-calendar"],
+            "readyWhen": "can now view"
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/react"
+  },
+  "generators": {
+    "@nrwl/react": {
+      "application": {
+        "style": "css",
+        "linter": "eslint",
+        "strict": true,
+        "babel": true
+      },
+      "component": {
+        "style": "css"
+      },
+      "library": {
+        "style": "css",
+        "linter": "eslint",
+        "strict": true
+      }
+    }
+  },
+  "defaultProject": "react-calendar"
+}

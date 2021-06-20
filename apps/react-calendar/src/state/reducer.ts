@@ -74,52 +74,52 @@ export const reducer = (state: AppStateType, action: AppActions) => {
         selectedDay: action.payload,
       };
     case ACTIONS.REPLACE_SELECTED_DAY_EVENTS:
-      const newEvents = action.payload;
       return {
         ...state,
         selectedDay: {
           ...state.selectedDay,
-          events: newEvents.sort(sortByStartTime),
+          events: action.payload.sort(sortByStartTime),
         },
       };
     case ACTIONS.DELETE_EVENT_FROM_SELECTED_DAY:
-      const { eventId } = action.payload;
       return {
         ...state,
         selectedDay: {
           ...state.selectedDay,
-          events: state.selectedDay.events.filter((el) => el.id !== eventId),
+          events: state.selectedDay.events.filter(
+            (el) => el.id !== action.payload.eventId
+          ),
         },
       };
     case ACTIONS.UPDATE_CALENDAR_DATA:
-      const { month, year } = action.payload;
       return {
         ...state,
-        calendarData: generateCalendarData(year, month, state.currentUser),
+        calendarData: generateCalendarData(
+          action.payload.year,
+          action.payload.month,
+          state.currentUser
+        ),
       };
     case ACTIONS.ADD_NOTIFICATION:
-      const newNotification = action.payload;
       return {
         ...state,
-        notifications: [...state.notifications, newNotification],
+        notifications: [...state.notifications, action.payload],
       };
     case ACTIONS.REMOVE_NOTIFICATION:
-      const { notificationId } = action.payload;
       return {
         ...state,
         notifications: state.notifications.filter(
-          (not) => not.id !== notificationId
+          (not) => not.id !== action.payload.notificationId
         ),
       };
     case ACTIONS.LOGIN:
-      const { login } = action.payload;
       return {
         ...state,
-        currentUser: login,
+        currentUser: action.payload.login,
         calendarData: generateCalendarData(
           state.currentYear,
           state.currentMonth,
-          login
+          action.payload.login
         ),
       };
     case ACTIONS.LOGOUT:
