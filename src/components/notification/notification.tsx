@@ -2,6 +2,7 @@ import './notification.scss';
 import { cn } from '@bem-react/classname';
 import { NOTIFICATIONS_TYPES_ENUM } from '../../constants';
 import { AppNotificationTypes } from '../notifications-block';
+import React from 'react';
 
 const bem = cn('Notification');
 

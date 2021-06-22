@@ -1,6 +1,6 @@
 import './event-item.scss';
 import { cn } from '@bem-react/classname';
-import { KeyboardEvent, useContext, useState } from 'react';
+import React, { KeyboardEvent, useContext, useState } from 'react';
 import { CalendarDayEvent } from '../calendar-day';
 import { ACTIONS, AppContext } from '../../state';
 import {
@@ -9,9 +9,11 @@ import {
   showNotification,
 } from '../../utils';
 import { validateAttendee, validateEvent } from './utils/validation';
-import { nanoid } from 'nanoid';
+// import { nanoid } from 'nanoid';
 import { KEY_ENTER } from '../../constants';
 import { DateTime } from 'luxon';
+
+const nanoid = () => new Date().toString();
 
 const bem = cn('EventItem');
 

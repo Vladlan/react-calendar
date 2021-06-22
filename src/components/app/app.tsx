@@ -4,6 +4,7 @@ import { NotificationsBlock } from '../notifications-block';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { CalendarPage } from '../../pages/calendar-page';
 import { LoginPage } from '../../pages/login-page';
+import React from 'react';
 
 export function App() {
   return (

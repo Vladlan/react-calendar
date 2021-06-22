@@ -1,5 +1,5 @@
 import './event-item.scss';
-import { useContext, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { CalendarDayEvent } from '../calendar-day';
 import { ACTIONS, AppContext } from '../../state';
 import { EventItemView } from './event-item-view';

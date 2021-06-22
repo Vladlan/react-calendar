@@ -1,4 +1,4 @@
-import { useReducer, FC } from 'react';
+import React, { useReducer, FC } from 'react';
 import { AppContext, initialState, reducer } from '../../state';
 
 export const AppContextProvider: FC = ({ children }) => {

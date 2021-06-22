@@ -1,6 +1,6 @@
 import './login-page.scss';
 import { cn } from '@bem-react/classname';
-import { KeyboardEvent, useContext, useState } from 'react';
+import React, { KeyboardEvent, useContext, useState } from 'react';
 import { ACTIONS, AppContext } from '../../state';
 import { useHistory } from 'react-router-dom';
 import { setCurrentUserInLocalStorage } from '../../utils';

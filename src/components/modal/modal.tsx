@@ -1,4 +1,4 @@
-import { ReactChild, useEffect } from 'react';
+import React, { ReactChild, useEffect } from 'react';
 import './modal.scss';
 import { cn } from '@bem-react/classname';
 import { createPortal } from 'react-dom';

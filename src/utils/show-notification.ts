@@ -1,8 +1,9 @@
 import { ACTIONS, AppActions } from '../state';
 import { NOTIFICATIONS_TYPES_ENUM } from '../constants';
 import { Dispatch } from 'react';
-import { nanoid } from 'nanoid';
+// import { nanoid } from 'nanoid';
 import { AppNotificationTypes } from '../components/notifications-block';
+const nanoid = () => new Date().toString();
 
 export const showNotification = (
   dispatch: Dispatch<AppActions>,

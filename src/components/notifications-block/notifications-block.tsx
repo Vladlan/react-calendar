@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import './notifications-block.scss';
 import { ACTIONS, AppContext } from '../../state';
 import { cn } from '@bem-react/classname';

@@ -1,4 +1,4 @@
-import { FC, memo } from 'react';
+import React, { FC, memo } from 'react';
 import './calendar-day.scss';
 import { cn } from '@bem-react/classname';
 

@@ -1,7 +1,7 @@
 import './event-item.scss';
 import { cn } from '@bem-react/classname';
 import { CalendarDayEvent } from '../calendar-day';
-import { memo } from 'react';
+import React, { memo } from 'react';
 
 const bem = cn('EventItem');
 

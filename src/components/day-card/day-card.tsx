@@ -1,6 +1,6 @@
 import './day-card.scss';
 import { cn } from '@bem-react/classname';
-import { useContext, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { AppContext } from '../../state';
 import { EventItem, EventItemEditor } from '../event-item';
 import { generateEmptyEventData } from '../../utils';

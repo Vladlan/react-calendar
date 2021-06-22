@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import './calendar.scss';
 import { DateTime, Info } from 'luxon';
 import { ACTIONS, AppContext } from '../../state';
