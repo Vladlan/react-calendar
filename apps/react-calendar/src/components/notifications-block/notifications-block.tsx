@@ -47,5 +47,5 @@ export function NotificationsBlock() {
         })}
       </aside>
     );
-  return <></>;
+  return null;
 }
